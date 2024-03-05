@@ -1,4 +1,4 @@
-package com.example.dibuild.ui.laminate
+package com.example.dibuild.ui.tile
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,13 +32,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LaminateCalcScreen() {
+fun TileCalcScreen() {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,7 +65,7 @@ fun LaminateCalcScreen() {
             }
 
             Text(
-                text = "Ламинат",
+                text = "Плитка",
                 fontSize = 30.sp,
             )
 
@@ -155,7 +157,7 @@ fun LaminateCalcScreen() {
             )
             {
                 Text(
-                    text = "Параметры ламината",
+                    text = "Параметры плитки",
                     modifier = Modifier.padding(10.dp),
                     fontSize = 30.sp
                 )
@@ -164,7 +166,7 @@ fun LaminateCalcScreen() {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = "Длина доски",
+                        text = "Длина одной\nплитки",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
@@ -189,7 +191,7 @@ fun LaminateCalcScreen() {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = "Ширина доски",
+                        text = "Ширина одной\nплитки",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
@@ -239,7 +241,7 @@ fun LaminateCalcScreen() {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = "Цена",
+                        text = "Цена за\nупаковку",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
@@ -256,7 +258,98 @@ fun LaminateCalcScreen() {
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     Text(
-                        text = "Р/м2",
+                        text = "Р",
+                        fontSize = 25.sp,
+                    )
+                }
+            }
+        }
+
+        Spacer(modifier = Modifier.padding(10.dp))
+
+        Card() {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            )
+            {
+                Text(
+                    text = "Параметры клея",
+                    modifier = Modifier.padding(10.dp),
+                    fontSize = 30.sp
+                )
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Масса упаковки\nклея",
+                        fontSize = 25.sp,
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    OutlinedTextField(
+                        value = "2.15",
+                        onValueChange = {/*TODO*/ },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.width(100.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Text(
+                        text = "г",
+                        fontSize = 25.sp,
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Цена упаковки\nклея",
+                        fontSize = 25.sp,
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    OutlinedTextField(
+                        value = "0.15",
+                        onValueChange = {/*TODO*/ },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.width(100.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Text(
+                        text = "Р",
+                        fontSize = 25.sp,
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Расход клея",
+                        fontSize = 25.sp,
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    OutlinedTextField(
+                        value = "20",
+                        onValueChange = {/*TODO*/ },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.width(100.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Text(
+                        text = "г/м^2",
                         fontSize = 25.sp,
                     )
                 }
@@ -266,7 +359,7 @@ fun LaminateCalcScreen() {
 }
 
 @Composable
-fun LaminateCalcResult(){
+fun TileCalcResult(){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -287,37 +380,191 @@ fun LaminateCalcResult(){
                 )
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        text = "Количество упаковок",
+                        text = "Количество упаковок\nплитки",
                         fontSize = 20.sp,
-                        )
+                    )
 
                     Text(
-                        text = "4 упаковки",
+                        text = "3 упаковки",
                         fontSize = 20.sp,)
                 }
 
                 Spacer(modifier = Modifier.padding(20.dp))
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Итоговая стоимость",
-                        fontSize = 30.sp,
-                        )
-                    Text(text = "2456 р.",
+                    Text(text = "Стоимость",
                         fontSize = 20.sp,
-                        )
+                    )
+                    Text(text = "14499 р.",
+                        fontSize = 20.sp,
+                    )
                 }
 
                 Spacer(modifier = Modifier.padding(20.dp))
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Излишки упаковок ламината",
+                    Text(text = "Излишки упаковок плитки",
                         fontSize = 20.sp,
-                        )
+                    )
                     Text(
                         text = "1 упаковка",
                         fontSize = 20.sp,
-                        )
+                    )
                 }
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "Количество упаковок клея",
+                        fontSize = 20.sp,
+                    )
+                    Text(
+                        text = "1 упаковка",
+                        fontSize = 20.sp,
+                    )
+                }
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "Стоимость",
+                        fontSize = 20.sp,
+                    )
+                    Text(
+                        text = "677 р.",
+                        fontSize = 20.sp,
+                    )
+                }
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "Излишки упаковок клея",
+                        fontSize = 20.sp,
+                    )
+                    Text(
+                        text = "1 упаковка",
+                        fontSize = 20.sp,
+                    )
+                }
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "Итоговая стоимость",
+                        fontSize = 20.sp,
+                    )
+                    Text(
+                        text = "15156 р.",
+                        fontSize = 20.sp,
+                    )
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun TileCalcHelp(){
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            ) {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Справка\n\nПлитка",
+                    fontSize = 50.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(20.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость провода =\n длина провода * цена провода",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость короба =\n длина короба * цена короба",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость выключателей = количество выключателей * цена выключателя",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость розеток = количество розеток * цена розетки",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Итого:\n Стоимость провода + Стоимость короба + Стоимость выключателей + Стоимость розеток",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
             }
         }
     }
@@ -325,8 +572,8 @@ fun LaminateCalcResult(){
 
 @Preview
 @Composable
-fun LaminateCalcPreview(){
+fun TileCalcPreview(){
     DibuildTheme {
-        LaminateCalcResult()
+        TileCalcHelp()
     }
 }

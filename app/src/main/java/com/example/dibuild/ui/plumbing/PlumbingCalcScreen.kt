@@ -1,4 +1,4 @@
-package com.example.dibuild.ui.laminate
+package com.example.dibuild.ui.plumbing
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -15,8 +15,6 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.History
 import androidx.compose.material.icons.sharp.Info
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import com.example.dibuild.ui.theme.DibuildTheme
@@ -25,20 +23,20 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LaminateCalcScreen() {
+fun PlumbingCalcScreen() {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -63,7 +61,7 @@ fun LaminateCalcScreen() {
             }
 
             Text(
-                text = "Ламинат",
+                text = "Сантехника",
                 fontSize = 30.sp,
             )
 
@@ -88,7 +86,7 @@ fun LaminateCalcScreen() {
             )
             {
                 Text(
-                    text = "Параметры помещения",
+                    text = "Параметры сантехники",
                     modifier = Modifier.padding(10.dp),
                     fontSize = 30.sp
                 )
@@ -98,7 +96,7 @@ fun LaminateCalcScreen() {
                     modifier = Modifier.padding(vertical = 8.dp)
                 ) {
                     Text(
-                        text = "Длина комнаты",
+                        text = "Длина труб",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
@@ -123,7 +121,7 @@ fun LaminateCalcScreen() {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = "Ширина комнаты",
+                        text = "Цена труб",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
@@ -139,48 +137,7 @@ fun LaminateCalcScreen() {
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.padding(10.dp))
-
-        Card() {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text(
-                    text = "Параметры ламината",
-                    modifier = Modifier.padding(10.dp),
-                    fontSize = 30.sp
-                )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Длина доски",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "2.15",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
+                        text = "₽/м",
                         fontSize = 25.sp,
                     )
                 }
@@ -189,37 +146,12 @@ fun LaminateCalcScreen() {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = "Ширина доски",
+                        text = "Количество\nвентилей",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     OutlinedTextField(
-                        value = "0.15",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Количество в\nупаковке",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "20",
+                        value = "5",
                         onValueChange = {/*TODO*/ },
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
@@ -239,13 +171,63 @@ fun LaminateCalcScreen() {
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
                     Text(
-                        text = "Цена",
+                        text = "Цена вентилей",
+                        fontSize = 25.sp,
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    OutlinedTextField(
+                        value = "50",
+                        onValueChange = {/*TODO*/ },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.width(100.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Text(
+                        text = "₽",
+                        fontSize = 25.sp,
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Цена счетчика",
+                        fontSize = 25.sp,
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    OutlinedTextField(
+                        value = "50",
+                        onValueChange = {/*TODO*/ },
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.width(100.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Text(
+                        text = "₽",
+                        fontSize = 25.sp,
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "Цена фильтра",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
 
                     OutlinedTextField(
-                        value = "678",
+                        value = "50",
                         onValueChange = {/*TODO*/ },
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
@@ -256,7 +238,7 @@ fun LaminateCalcScreen() {
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     Text(
-                        text = "Р/м2",
+                        text = "₽",
                         fontSize = 25.sp,
                     )
                 }
@@ -266,7 +248,7 @@ fun LaminateCalcScreen() {
 }
 
 @Composable
-fun LaminateCalcResult(){
+fun PlumbingCalcResult(){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -287,13 +269,24 @@ fun LaminateCalcResult(){
                 )
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
                     Text(
-                        text = "Количество упаковок",
+                        text = "Стоимость труб",
                         fontSize = 20.sp,
                         )
 
                     Text(
-                        text = "4 упаковки",
+                        text = "50 ₽",
                         fontSize = 20.sp,)
+                }
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "Стоимость вентилей",
+                        fontSize = 20.sp,
+                        )
+                    Text(text = "50 ₽",
+                        fontSize = 20.sp,
+                        )
                 }
 
                 Spacer(modifier = Modifier.padding(20.dp))
@@ -302,19 +295,8 @@ fun LaminateCalcResult(){
                     Text(text = "Итоговая стоимость",
                         fontSize = 30.sp,
                         )
-                    Text(text = "2456 р.",
-                        fontSize = 20.sp,
-                        )
-                }
-
-                Spacer(modifier = Modifier.padding(20.dp))
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Излишки упаковок ламината",
-                        fontSize = 20.sp,
-                        )
                     Text(
-                        text = "1 упаковка",
+                        text = "100 ₽",
                         fontSize = 20.sp,
                         )
                 }
@@ -323,10 +305,86 @@ fun LaminateCalcResult(){
     }
 }
 
+@Composable
+fun PlumbingCalcHelp(){
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            ) {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Справка\n\nСантехника",
+                    fontSize = 50.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(20.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость труб =\n длина труб * цена трубы",
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость вентилей =\n количество вентилей * цена вентиля",
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Итого:\nСтоимость труб + Стоимость вентилей + Стоимость счетчика + Стоимость фильтра",
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
-fun LaminateCalcPreview(){
+fun PlumbingCalcPreview(){
     DibuildTheme {
-        LaminateCalcResult()
+        PlumbingCalcHelp()
     }
 }
