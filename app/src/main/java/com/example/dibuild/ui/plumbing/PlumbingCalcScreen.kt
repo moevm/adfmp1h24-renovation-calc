@@ -28,6 +28,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -304,10 +305,86 @@ fun PlumbingCalcResult(){
     }
 }
 
+@Composable
+fun PlumbingCalcHelp(){
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            ) {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Справка\n\nСантехника",
+                    fontSize = 50.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(20.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость труб =\n длина труб * цена трубы",
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость вентилей =\n количество вентилей * цена вентиля",
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Итого:\nСтоимость труб + Стоимость вентилей + Стоимость счетчика + Стоимость фильтра",
+                    fontSize = 30.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun PlumbingCalcPreview(){
     DibuildTheme {
-        PlumbingCalcScreen()
+        PlumbingCalcHelp()
     }
 }
