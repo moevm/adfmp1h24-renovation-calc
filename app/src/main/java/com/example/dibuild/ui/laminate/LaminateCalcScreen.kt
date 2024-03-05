@@ -300,8 +300,8 @@ fun LaminateCalcResult(){
                 Spacer(modifier = Modifier.padding(20.dp))
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Стоимость",
-                        fontSize = 20.sp,
+                    Text(text = "Итоговая стоимость",
+                        fontSize = 30.sp,
                         )
                     Text(text = "2456 р.",
                         fontSize = 20.sp,
