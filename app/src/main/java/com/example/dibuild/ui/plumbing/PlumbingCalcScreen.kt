@@ -136,7 +136,7 @@ fun PlumbingCalcScreen() {
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     Text(
-                        text = "Р/м",
+                        text = "₽/м",
                         fontSize = 25.sp,
                     )
                 }
@@ -186,7 +186,7 @@ fun PlumbingCalcScreen() {
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     Text(
-                        text = "Р",
+                        text = "₽",
                         fontSize = 25.sp,
                     )
                 }
@@ -211,7 +211,7 @@ fun PlumbingCalcScreen() {
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     Text(
-                        text = "Р",
+                        text = "₽",
                         fontSize = 25.sp,
                     )
                 }
@@ -237,7 +237,7 @@ fun PlumbingCalcScreen() {
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     Text(
-                        text = "Р",
+                        text = "₽",
                         fontSize = 25.sp,
                     )
                 }
@@ -273,7 +273,7 @@ fun PlumbingCalcResult(){
                         )
 
                     Text(
-                        text = "50 Р",
+                        text = "50 ₽",
                         fontSize = 20.sp,)
                 }
 
@@ -283,7 +283,7 @@ fun PlumbingCalcResult(){
                     Text(text = "Стоимость вентилей",
                         fontSize = 20.sp,
                         )
-                    Text(text = "50 Р",
+                    Text(text = "50 ₽",
                         fontSize = 20.sp,
                         )
                 }
@@ -295,7 +295,7 @@ fun PlumbingCalcResult(){
                         fontSize = 30.sp,
                         )
                     Text(
-                        text = "100 Р",
+                        text = "100 ₽",
                         fontSize = 20.sp,
                         )
                 }
