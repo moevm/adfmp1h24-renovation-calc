@@ -1,9 +1,11 @@
 package com.example.dibuild.ui.laminate
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -264,11 +266,68 @@ fun LaminateCalcScreen() {
     }
 }
 
+@Composable
+fun LaminateCalcResult(){
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxSize()
+    ){
+        Card() {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+                    .fillMaxWidth()
+            ) {
+                Text(
+                    text = "Расчёт",
+                    fontSize = 50.sp,
+                    modifier = Modifier.padding(20.dp)
+                )
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "Количество упаковок",
+                        fontSize = 20.sp,
+                        )
+
+                    Text(
+                        text = "4 упаковки",
+                        fontSize = 20.sp,)
+                }
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "Стоимость",
+                        fontSize = 20.sp,
+                        )
+                    Text(text = "2456 р.",
+                        fontSize = 20.sp,
+                        )
+                }
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(text = "Излишки упаковок ламината",
+                        fontSize = 20.sp,
+                        )
+                    Text(
+                        text = "1 упаковка",
+                        fontSize = 20.sp,
+                        )
+                }
+            }
+        }
+    }
+}
 
 @Preview
 @Composable
 fun LaminateCalcPreview(){
     DibuildTheme {
-        LaminateCalcScreen()
+        LaminateCalcResult()
     }
 }
