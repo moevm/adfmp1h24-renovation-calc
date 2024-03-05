@@ -35,6 +35,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.dibuild.model.CalculatedResult
 import com.example.dibuild.model.CalculatedResults
+import com.example.dibuild.model.Help
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
 
@@ -216,6 +217,82 @@ fun WallpapersCalcResult() {
     }
 }
 
+@Composable
+fun WallpapersCalcHelp(){
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            ) {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Справка\n\nОбои",
+                    fontSize = 50.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+            val WallpaperHelpParams = listOf(
+                Help(
+                    "Общая площадь стен = 2*(длина комнаты + ширина комнаты)*высота комнаты"
+                ),
+
+                Help(
+                    "Требуемое количество рулонов = Общая площадь стен / (ширина рулона * длина рулона) (округляем вверх)"
+                ),
+
+                Help(
+                    "Стоимость рулонов = Требуемое количество рулонов * Цена за рулон"
+                ),
+
+                Help(
+                    "Излишек = Количество рулонов - Количество рулонов без округления вверх"
+                ),
+
+                Help(
+                    "Излишек стоимости = Излишек * Цена за рулон"
+                ),
+
+                Help(
+                    "Количество упаковок клея = Общая площадь стен * Расход клея / масса одной упаковки клея (Округлить вверх)"
+                ),
+
+                Help(
+                    "Стоимость = Количество упаковок клея * Стоимость одной упаковки клея"
+                ),
+
+                Help(
+                    "Излишек = Количество упаковок клея - Количество упаковок клея без округления вверх"
+                ),
+
+                Help(
+                    "Излишек стоимости = Излишек * Стоимость одной упаковки клея"
+                )
+            )
+
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                items(WallpaperHelpParams) {
+                    Text(
+                        text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun WallpapersCalcResultPreview() {
@@ -229,5 +306,13 @@ fun WallpapersCalcResultPreview() {
 fun WallpapersCalcPreview() {
     DibuildTheme {
         WallpapersCalcScreen()
+    }
+}
+
+@Preview
+@Composable
+fun WallpapersCalcHelpPreview() {
+    DibuildTheme {
+        WallpapersCalcHelp()
     }
 }
