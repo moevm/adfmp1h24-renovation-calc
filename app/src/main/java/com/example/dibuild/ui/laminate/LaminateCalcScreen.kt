@@ -73,11 +73,8 @@ fun LaminateCalcScreen() {
             }
         }
 
-        Card(
-            colors = CardDefaults.cardColors(
-                containerColor = Color(0xffdae5e3),
-            ),
-        ) {
+        Card()
+        {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxWidth()
@@ -139,6 +136,115 @@ fun LaminateCalcScreen() {
                         fontSize = 25.sp,
                     )
                 }
+            }
+        }
+
+        Spacer(modifier = Modifier.padding(10.dp))
+
+        Card() {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxWidth()
+            )
+            {
+                Text(text = "Параметры ламината",
+                    modifier = Modifier.padding(10.dp),
+                    fontSize = 30.sp)
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(text = "Длина доски",
+                        fontSize = 25.sp,
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    OutlinedTextField(
+                        value = "2.15",
+                        onValueChange = {/*TODO*/},
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.width(100.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Text(text = "м",
+                        fontSize = 25.sp,
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(text = "Ширина доски",
+                        fontSize = 25.sp,
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    OutlinedTextField(
+                        value = "0.15",
+                        onValueChange = {/*TODO*/},
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.width(100.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Text(text = "м",
+                        fontSize = 25.sp,
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(text = "Количество в\nупаковке",
+                        fontSize = 25.sp,
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    OutlinedTextField(
+                        value = "20",
+                        onValueChange = {/*TODO*/},
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.width(100.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Text(text = "шт",
+                        fontSize = 25.sp,
+                    )
+                }
+
+                Row(
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(text = "Цена",
+                        fontSize = 25.sp,
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+
+                    OutlinedTextField(
+                        value = "678",
+                        onValueChange = {/*TODO*/},
+                        keyboardOptions = KeyboardOptions.Default.copy(
+                            keyboardType = KeyboardType.Number,
+                            imeAction = ImeAction.Next
+                        ),
+                        shape = RoundedCornerShape(8.dp),
+                        modifier = Modifier.width(100.dp)
+                    )
+                    Spacer(modifier = Modifier.padding(10.dp))
+                    Text(text = "Р/м2",
+                        fontSize = 25.sp,
+                    )
+                }
+
+
             }
         }
     }
