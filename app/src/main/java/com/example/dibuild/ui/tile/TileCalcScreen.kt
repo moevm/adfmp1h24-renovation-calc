@@ -32,6 +32,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -39,7 +40,7 @@ import androidx.compose.ui.unit.sp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun LaminateCalcScreen() {
+fun TileCalcScreen() {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -358,7 +359,7 @@ fun LaminateCalcScreen() {
 }
 
 @Composable
-fun LaminateCalcResult(){
+fun TileCalcResult(){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -463,10 +464,116 @@ fun LaminateCalcResult(){
     }
 }
 
+@Composable
+fun TileCalcHelp(){
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            ) {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Справка\n\nПлитка",
+                    fontSize = 50.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(20.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость провода =\n длина провода * цена провода",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость короба =\n длина короба * цена короба",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость выключателей = количество выключателей * цена выключателя",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Стоимость розеток = количество розеток * цена розетки",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Итого:\n Стоимость провода + Стоимость короба + Стоимость выключателей + Стоимость розеток",
+                    fontSize = 25.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
-fun LaminateCalcPreview(){
+fun TileCalcPreview(){
     DibuildTheme {
-        LaminateCalcResult()
+        TileCalcHelp()
     }
 }
