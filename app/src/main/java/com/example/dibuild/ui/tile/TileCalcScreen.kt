@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -36,6 +38,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.dibuild.model.Param
+import com.example.dibuild.model.ParamsBlock
+import com.example.dibuild.model.Help
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -491,80 +496,54 @@ fun TileCalcHelp(){
                 )
 
             }
+            val TileHelpParams = listOf(
+                Help(
+                    "Длина плитки * Ширина плитки * Количество штук в упаковке = Площадь одной упаковки"
+                ),
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(20.dp)
-            ) {
+                Help(
+                    "Количество упаковок = Площадь пола / площадь одной упаковки (округляем вверх)"
+                ),
 
-                Text(
-                    text = "Стоимость провода =\n длина провода * цена провода",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center
+                Help(
+                    "Стоимость плитки = количество упаковок * площадь одной упаковки * цена за м^2"
+                ),
+
+                Help(
+                    "Излишек = Количество упаковок - Количество упаковок без округления вверх"
+                ),
+
+                Help(
+                    "Излишек стоимости = Излишек * площадь одной упаковки * цена за м^2"
+                ),
+
+                Help(
+                    "Количество упаковок клея = Площадь пола * Расход клея / Масса одной упаковки клея (Округлить вверх)"
+                ),
+
+                Help(
+                    "Стоимость клея = Количество упаковок клея * Стоимость одной упаковки клея"
+                ),
+
+                Help(
+                    "Излишек = Количество упаковок клея - Количество упаковок клея без округления вверх"
+                ),
+
+                Help(
+                    "Излишек стоимости = Излишек * Стоимость одной упаковки клея"
+                ),
+
+                Help(
+                    "Итого: стоимость клея + стоимость плитки"
                 )
+            )
 
-            }
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
-
-                Text(
-                    text = "Стоимость короба =\n длина короба * цена короба",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center
-                )
-
-            }
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
-
-                Text(
-                    text = "Стоимость выключателей = количество выключателей * цена выключателя",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center
-                )
-
-            }
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
-
-                Text(
-                    text = "Стоимость розеток = количество розеток * цена розетки",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center
-                )
-
-            }
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
-
-                Text(
-                    text = "Итого:\n Стоимость провода + Стоимость короба + Стоимость выключателей + Стоимость розеток",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center
-                )
-
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                items(TileHelpParams) {
+                    Text(
+                        text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
+                    )
+                }
             }
         }
     }

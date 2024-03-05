@@ -422,7 +422,7 @@ fun ElectricianCalcHelp(){
             ) {
 
                 Text(
-                    text = "Справка\n\nПлитка",
+                    text = "Справка\n\nЭлектрика",
                     fontSize = 50.sp,
                     textAlign = TextAlign.Center
                 )
