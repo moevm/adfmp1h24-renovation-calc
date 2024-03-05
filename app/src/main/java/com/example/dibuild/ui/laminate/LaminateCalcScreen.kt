@@ -14,7 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.History
 import androidx.compose.material.icons.sharp.Info
 import androidx.compose.material3.Card
-import androidx.compose.material3.CardDefaults
+import com.example.dibuild.ui.theme.DibuildTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
-@Preview
+
 @Composable
 fun LaminateCalcScreen() {
     Column(
@@ -233,7 +233,7 @@ fun LaminateCalcScreen() {
                         onValueChange = {/*TODO*/},
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
+                            imeAction = ImeAction.Done
                         ),
                         shape = RoundedCornerShape(8.dp),
                         modifier = Modifier.width(100.dp)
@@ -247,5 +247,13 @@ fun LaminateCalcScreen() {
 
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun LaminateCalcPreview(){
+    DibuildTheme {
+        LaminateCalcScreen()
     }
 }
