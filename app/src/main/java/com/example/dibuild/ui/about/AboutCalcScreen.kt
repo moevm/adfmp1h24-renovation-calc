@@ -1,4 +1,4 @@
-package com.example.dibuild.ui.laminate
+package com.example.dibuild.ui.about
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
