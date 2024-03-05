@@ -33,6 +33,9 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.dibuild.model.CalculatedResult
+import com.example.dibuild.model.CalculatedResults
+import com.example.dibuild.model.Help
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
 
@@ -151,6 +154,30 @@ fun WallpapersCalcScreen() {
 
 @Composable
 fun WallpapersCalcResult() {
+
+    val WallpaperCalculatedResult = listOf(
+        CalculatedResults(
+            listOf(
+                CalculatedResult("Количество рулонов обоев", "100", "шт"),
+                CalculatedResult("Стоимость", "50", "₽"),
+                CalculatedResult("Излишки рулонов обоев", "1", "шт"),
+            )
+        ),
+
+        CalculatedResults(
+            listOf(
+                CalculatedResult("Количество упаковок клея","50", "шт"),
+                CalculatedResult("Стоимость","50", "₽"),
+                CalculatedResult("Излишки упаковок клея","1", "шт"),
+            )
+        ),
+
+        CalculatedResults(
+            listOf(
+                CalculatedResult("Итоговая стоимость", "100", "₽")
+            )
+        )
+    )
     Box(
         contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()
     ) {
@@ -165,41 +192,100 @@ fun WallpapersCalcResult() {
                 Text(
                     text = "Расчёт", fontSize = 50.sp, modifier = Modifier.padding(20.dp)
                 )
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        text = "Количество упаковок",
-                        fontSize = 20.sp,
-                    )
 
-                    Text(
-                        text = "4 упаковки",
-                        fontSize = 20.sp,
-                    )
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    WallpaperCalculatedResult.forEach{item ->
+                        item.results.forEach {result ->
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                Text(
+                                    text = result.name,
+                                    fontSize = 20.sp,
+                                )
+
+                                Text(
+                                    text = "${result.value} ${result.unit}",
+                                    fontSize = 20.sp,
+                                )
+                                Spacer(modifier = Modifier.padding(5.dp))
+                            }
+                        }
+                        Spacer(modifier = Modifier.padding(20.dp))
+                    }
                 }
+            }
+        }
+    }
+}
 
-                Spacer(modifier = Modifier.padding(20.dp))
+@Composable
+fun WallpapersCalcHelp(){
 
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        text = "Стоимость",
-                        fontSize = 20.sp,
-                    )
-                    Text(
-                        text = "2456 р.",
-                        fontSize = 20.sp,
-                    )
-                }
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
 
-                Spacer(modifier = Modifier.padding(20.dp))
+            ) {
 
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Справка\n\nОбои",
+                    fontSize = 50.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+            val WallpaperHelpParams = listOf(
+                Help(
+                    "Общая площадь стен = 2*(длина комнаты + ширина комнаты)*высота комнаты"
+                ),
+
+                Help(
+                    "Требуемое количество рулонов = Общая площадь стен / (ширина рулона * длина рулона) (округляем вверх)"
+                ),
+
+                Help(
+                    "Стоимость рулонов = Требуемое количество рулонов * Цена за рулон"
+                ),
+
+                Help(
+                    "Излишек = Количество рулонов - Количество рулонов без округления вверх"
+                ),
+
+                Help(
+                    "Излишек стоимости = Излишек * Цена за рулон"
+                ),
+
+                Help(
+                    "Количество упаковок клея = Общая площадь стен * Расход клея / масса одной упаковки клея (Округлить вверх)"
+                ),
+
+                Help(
+                    "Стоимость = Количество упаковок клея * Стоимость одной упаковки клея"
+                ),
+
+                Help(
+                    "Излишек = Количество упаковок клея - Количество упаковок клея без округления вверх"
+                ),
+
+                Help(
+                    "Излишек стоимости = Излишек * Стоимость одной упаковки клея"
+                )
+            )
+
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                items(WallpaperHelpParams) {
                     Text(
-                        text = "Излишки упаковок ламината",
-                        fontSize = 20.sp,
-                    )
-                    Text(
-                        text = "1 упаковка",
-                        fontSize = 20.sp,
+                        text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
                     )
                 }
             }
@@ -220,5 +306,13 @@ fun WallpapersCalcResultPreview() {
 fun WallpapersCalcPreview() {
     DibuildTheme {
         WallpapersCalcScreen()
+    }
+}
+
+@Preview
+@Composable
+fun WallpapersCalcHelpPreview() {
+    DibuildTheme {
+        WallpapersCalcHelp()
     }
 }
