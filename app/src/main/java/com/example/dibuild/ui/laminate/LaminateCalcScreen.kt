@@ -38,8 +38,6 @@ import androidx.compose.ui.unit.sp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LaminateCalcScreen() {
-    val showResult = remember { mutableStateOf(false) }
-
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -155,20 +153,23 @@ fun LaminateCalcScreen() {
                 modifier = Modifier.fillMaxWidth()
             )
             {
-                Text(text = "Параметры ламината",
+                Text(
+                    text = "Параметры ламината",
                     modifier = Modifier.padding(10.dp),
-                    fontSize = 30.sp)
+                    fontSize = 30.sp
+                )
 
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(text = "Длина доски",
+                    Text(
+                        text = "Длина доски",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     OutlinedTextField(
                         value = "2.15",
-                        onValueChange = {/*TODO*/},
+                        onValueChange = {/*TODO*/ },
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
                             imeAction = ImeAction.Next
@@ -177,7 +178,8 @@ fun LaminateCalcScreen() {
                         modifier = Modifier.width(100.dp)
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
-                    Text(text = "м",
+                    Text(
+                        text = "м",
                         fontSize = 25.sp,
                     )
                 }
@@ -185,13 +187,14 @@ fun LaminateCalcScreen() {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(text = "Ширина доски",
+                    Text(
+                        text = "Ширина доски",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     OutlinedTextField(
                         value = "0.15",
-                        onValueChange = {/*TODO*/},
+                        onValueChange = {/*TODO*/ },
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
                             imeAction = ImeAction.Next
@@ -200,7 +203,8 @@ fun LaminateCalcScreen() {
                         modifier = Modifier.width(100.dp)
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
-                    Text(text = "м",
+                    Text(
+                        text = "м",
                         fontSize = 25.sp,
                     )
                 }
@@ -208,13 +212,14 @@ fun LaminateCalcScreen() {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(text = "Количество в\nупаковке",
+                    Text(
+                        text = "Количество в\nупаковке",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
                     OutlinedTextField(
                         value = "20",
-                        onValueChange = {/*TODO*/},
+                        onValueChange = {/*TODO*/ },
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
                             imeAction = ImeAction.Next
@@ -223,7 +228,8 @@ fun LaminateCalcScreen() {
                         modifier = Modifier.width(100.dp)
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
-                    Text(text = "шт",
+                    Text(
+                        text = "шт",
                         fontSize = 25.sp,
                     )
                 }
@@ -231,14 +237,15 @@ fun LaminateCalcScreen() {
                 Row(
                     verticalAlignment = Alignment.CenterVertically,
                 ) {
-                    Text(text = "Цена",
+                    Text(
+                        text = "Цена",
                         fontSize = 25.sp,
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
 
                     OutlinedTextField(
                         value = "678",
-                        onValueChange = {/*TODO*/},
+                        onValueChange = {/*TODO*/ },
                         keyboardOptions = KeyboardOptions.Default.copy(
                             keyboardType = KeyboardType.Number,
                             imeAction = ImeAction.Done
@@ -247,23 +254,11 @@ fun LaminateCalcScreen() {
                         modifier = Modifier.width(100.dp)
                     )
                     Spacer(modifier = Modifier.padding(10.dp))
-                    Text(text = "Р/м2",
+                    Text(
+                        text = "Р/м2",
                         fontSize = 25.sp,
                     )
                 }
-
-                Button(onClick = {showResult.value = true}) {
-                    Text(text = "Push me")
-                }
-
-                if (showResult.value){
-                    AlertDialog(onDismissRequest = { showResult.value = false })
-                    {
-                        Text(text = "MODAL WINDOW")
-                    }
-                }
-
-
             }
         }
     }
