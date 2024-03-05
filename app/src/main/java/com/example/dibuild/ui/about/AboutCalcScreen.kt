@@ -43,7 +43,7 @@ import androidx.compose.ui.unit.sp
 fun AboutCalcScreen() {
     Box(
         contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
+        modifier = Modifier.fillMaxWidth()
     ) {
         Column(
             verticalArrangement = Arrangement.Top,
@@ -70,12 +70,12 @@ fun AboutCalcScreen() {
                 verticalAlignment = Alignment.CenterVertically,
                 horizontalArrangement = Arrangement.SpaceBetween,
                 modifier = Modifier
-                    .padding(10.dp)
+                    .padding(20.dp)
             ) {
 
                 Text(
-                    text = "Строительный\nкалькулятор\ndibuild",
-                    fontSize = 30.sp,
+                    text = "Строительный\n\nкалькулятор\n\ndibuild",
+                    fontSize = 40.sp,
                     textAlign = TextAlign.Center
                 )
 
