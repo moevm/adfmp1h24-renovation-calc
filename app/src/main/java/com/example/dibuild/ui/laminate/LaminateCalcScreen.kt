@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -32,9 +34,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.dibuild.model.Help
 
 
 @Composable
@@ -323,10 +327,70 @@ fun LaminateCalcResult(){
     }
 }
 
+@Composable
+fun LaminateCalcHelp(){
+
+    Box(
+        contentAlignment = Alignment.Center,
+        modifier = Modifier.fillMaxWidth()
+    ) {
+        Column(
+            verticalArrangement = Arrangement.Top,
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            ) {
+
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
+                horizontalArrangement = Arrangement.SpaceBetween,
+                modifier = Modifier
+                    .padding(10.dp)
+            ) {
+
+                Text(
+                    text = "Справка\n\nЛаминат",
+                    fontSize = 50.sp,
+                    textAlign = TextAlign.Center
+                )
+
+            }
+            val LaminateHelpParams = listOf(
+                Help(
+                    "Длина ламината * Ширина Ламината * Количество штук в упаковке = Площадь одной упаковки"
+                ),
+
+                Help(
+                    "Количество упаковок = Площадь комнаты / площадь одной упаковки (округляем вверх)"
+                ),
+
+                Help(
+                    "Итого = количество упаковок * площадь одной упаковки * цена за м^2"
+                ),
+
+                Help(
+                    "Излишек = Количество упаковок - Количество упаковок без округления вверх"
+                ),
+
+                Help(
+                    "Излишек стоимости = Излишек * площадь одной упаковки * цена за м^2"
+                )
+            )
+
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                items(LaminateHelpParams) {
+                    Text(
+                        text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
+                    )
+                }
+            }
+        }
+    }
+}
+
 @Preview
 @Composable
 fun LaminateCalcPreview(){
     DibuildTheme {
-        LaminateCalcResult()
+        LaminateCalcHelp()
     }
 }
