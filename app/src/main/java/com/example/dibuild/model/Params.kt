@@ -11,3 +11,7 @@ data class Param(
     val value: String,
     val unit: String,
 )
+
+data class Help(
+    val info: String
+)
