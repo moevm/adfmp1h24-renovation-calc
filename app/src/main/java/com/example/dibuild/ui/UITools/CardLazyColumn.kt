@@ -1,4 +1,4 @@
-package com.example.dibuild.ui.cardLazyColumn
+package com.example.dibuild.ui.UITools
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
