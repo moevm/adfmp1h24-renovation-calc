@@ -13,13 +13,18 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.History
 import androidx.compose.material.icons.sharp.Info
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.ExperimentalMaterial3Api
 import com.example.dibuild.ui.theme.DibuildTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -30,8 +35,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun LaminateCalcScreen() {
+    val showResult = remember { mutableStateOf(false) }
+
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -244,11 +252,23 @@ fun LaminateCalcScreen() {
                     )
                 }
 
+                Button(onClick = {showResult.value = true}) {
+                    Text(text = "Push me")
+                }
+
+                if (showResult.value){
+                    AlertDialog(onDismissRequest = { showResult.value = false })
+                    {
+                        Text(text = "MODAL WINDOW")
+                    }
+                }
+
 
             }
         }
     }
 }
+
 
 @Preview
 @Composable
