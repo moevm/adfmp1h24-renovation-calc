@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.History
 import androidx.compose.material.icons.sharp.Info
@@ -28,10 +30,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.DibuildScreens
+import com.example.dibuild.model.Help
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
 import com.example.dibuild.ui.UITools.CalculatePageBottomBar
 import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
+import com.example.dibuild.ui.UITools.InfoPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
 import com.example.dibuild.ui.theme.DibuildTheme
 
@@ -240,80 +244,41 @@ fun ElectricianCalcHelp(
 
             }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(20.dp)
-            ) {
 
-                Text(
-                    text = "Стоимость провода =\n длина провода * цена провода",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center
+            val ElectricianHelpParams = listOf(
+                Help(
+                    "Стоимость провода =\nдлина провода * цена провода"
+                ),
+
+                Help(
+                    "Стоимость короба =\n длина короба * цена короба"
+                ),
+
+                Help(
+                    "Стоимость выключателей = количество выключателей * цена выключателя"
+                ),
+
+                Help(
+                    "Стоимость розеток = количество розеток * цена розетки"
+                ),
+
+                Help(
+                    "Итого:\nСтоимость провода + Стоимость короба + Стоимость выключателей + Стоимость розеток"
                 )
+            )
 
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(0.9f)) {
+                items(ElectricianHelpParams) {
+                    Text(
+                        text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
+                    )
+                }
             }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
-
-                Text(
-                    text = "Стоимость короба =\n длина короба * цена короба",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center
-                )
-
+            Box(modifier = Modifier.weight(0.15f)) {
+                InfoPageBottomBar(navController)
             }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
-
-                Text(
-                    text = "Стоимость выключателей = количество выключателей * цена выключателя",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center
-                )
-
-            }
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
-
-                Text(
-                    text = "Стоимость розеток = количество розеток * цена розетки",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center
-                )
-
-            }
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
-
-                Text(
-                    text = "Итого:\n Стоимость провода + Стоимость короба + Стоимость выключателей + Стоимость розеток",
-                    fontSize = 25.sp,
-                    textAlign = TextAlign.Center
-                )
-
-            }
         }
     }
 }
