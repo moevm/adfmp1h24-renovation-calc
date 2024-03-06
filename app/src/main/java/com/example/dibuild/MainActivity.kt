@@ -15,11 +15,15 @@ import androidx.navigation.NavDestination
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.ui.about.AboutCalcScreen
+import com.example.dibuild.ui.electrician.ElectricianCalcHelp
+import com.example.dibuild.ui.electrician.ElectricianCalcResult
 import com.example.dibuild.ui.electrician.ElectricianCalcScreen
 import com.example.dibuild.ui.history.HistoryCalcScreen
 import com.example.dibuild.ui.laminate.LaminateCalcHelp
 import com.example.dibuild.ui.laminate.LaminateCalcResult
 import com.example.dibuild.ui.laminate.LaminateCalcScreen
+import com.example.dibuild.ui.plumbing.PlumbingCalcHelp
+import com.example.dibuild.ui.plumbing.PlumbingCalcResult
 import com.example.dibuild.ui.plumbing.PlumbingCalcScreen
 import com.example.dibuild.ui.sections.SectionsCalcScreen
 import com.example.dibuild.ui.theme.DibuildTheme
@@ -130,8 +134,25 @@ fun DibuildApp(
             ElectricianCalcScreen(navController)
         }
 
+        composable(route = DibuildScreens.ElectricianHelp.name){
+            ElectricianCalcHelp(navController)
+        }
+
+        composable(route = DibuildScreens.ElectricianRes.name){
+            ElectricianCalcResult(navController)
+        }
+
+
         composable(route = DibuildScreens.PlumbingCalc.name){
             PlumbingCalcScreen(navController)
+        }
+
+        composable(route = DibuildScreens.PlumbingHelp.name){
+            PlumbingCalcHelp(navController)
+        }
+
+        composable(route = DibuildScreens.PlumbingRes.name){
+            PlumbingCalcResult(navController)
         }
     }
 }

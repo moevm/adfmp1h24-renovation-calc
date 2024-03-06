@@ -27,8 +27,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.dibuild.DibuildScreens
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
+import com.example.dibuild.ui.UITools.CalculatePageBottomBar
+import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
 import com.example.dibuild.ui.theme.DibuildTheme
 
@@ -101,12 +104,21 @@ fun ElectricianCalcScreen(
             }
         }
 
-        inputCalcCard(paramsBlockList = ElectricianParams)
+        Box(modifier = Modifier.weight(0.9f)) {
+            inputCalcCard(paramsBlockList = ElectricianParams)
+        }
+
+        Box(modifier = Modifier.weight(0.135f)) {
+            CalculatePageBottomBar(navController, DibuildScreens.ElectricianRes.name)
+        }
+
     }
 }
 
 @Composable
-fun ElectricianCalcResult(){
+fun ElectricianCalcResult(
+    navController: NavHostController
+){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -183,13 +195,20 @@ fun ElectricianCalcResult(){
                     )
                 }
             }
+            Column(verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ){
+                CalculateResultsPageBottomBar(navController, DibuildScreens.ElectricianRes.name)
+            }
         }
     }
 }
 
 @Composable
-fun ElectricianCalcHelp(){
-
+fun ElectricianCalcHelp(
+    navController: NavHostController
+){
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxWidth()
@@ -297,7 +316,7 @@ fun ElectricianCalcHelp(){
 @Composable
 fun ElectricianCalcResultPreview() {
     DibuildTheme {
-        ElectricianCalcResult()
+        ElectricianCalcResult(rememberNavController())
     }
 }
 
@@ -313,7 +332,7 @@ fun ElectricianCalcPreview() {
 @Composable
 fun ElectricianCalcHelpPreview() {
     DibuildTheme {
-        ElectricianCalcHelp()
+        ElectricianCalcHelp(rememberNavController())
     }
 }
 
