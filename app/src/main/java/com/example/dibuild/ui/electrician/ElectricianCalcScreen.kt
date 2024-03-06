@@ -199,7 +199,7 @@ fun ElectricianCalcResult(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize()
             ){
-                CalculateResultsPageBottomBar(navController, DibuildScreens.ElectricianRes.name)
+                CalculateResultsPageBottomBar(navController, DibuildScreens.ElectricianCalc.name)
             }
         }
     }
