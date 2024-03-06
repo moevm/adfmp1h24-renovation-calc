@@ -21,6 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.model.Help
+import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 import com.example.dibuild.ui.UITools.InfoPageBottomBar
 
 
@@ -84,7 +85,7 @@ fun HistoryCalcScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize()
             ) {
-                InfoPageBottomBar(navController)
+                CalculateResultsPageBottomBar(navController, "History")
             }
         }
     }
