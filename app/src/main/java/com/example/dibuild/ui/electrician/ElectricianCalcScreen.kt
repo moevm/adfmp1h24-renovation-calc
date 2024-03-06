@@ -76,7 +76,7 @@ fun ElectricianCalcScreen(
                 .fillMaxWidth()
                 .padding(10.dp)
         ) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate(DibuildScreens.History.name) }) {
                 Icon(
                     imageVector = Icons.Sharp.History,
                     contentDescription = null,
@@ -92,7 +92,7 @@ fun ElectricianCalcScreen(
             )
 
             IconButton(
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(DibuildScreens.ElectricianHelp.name) }
             ) {
                 Icon(
                     imageVector = Icons.Sharp.Info,

@@ -67,7 +67,7 @@ fun PlumbingCalcScreen(
                 .fillMaxWidth()
                 .padding(10.dp)
         ) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate(DibuildScreens.History.name) }) {
                 Icon(
                     imageVector = Icons.Sharp.History,
                     contentDescription = null,
@@ -83,7 +83,7 @@ fun PlumbingCalcScreen(
             )
 
             IconButton(
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(DibuildScreens.PlumbingHelp.name) }
             ) {
                 Icon(
                     imageVector = Icons.Sharp.Info,

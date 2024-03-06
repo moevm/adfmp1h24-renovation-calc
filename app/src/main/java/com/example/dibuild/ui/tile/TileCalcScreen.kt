@@ -82,7 +82,7 @@ fun TileCalcScreen(
                 .fillMaxWidth()
                 .padding(10.dp)
         ) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate(DibuildScreens.History.name) }) {
                 Icon(
                     imageVector = Icons.Sharp.History,
                     contentDescription = null,
@@ -98,7 +98,7 @@ fun TileCalcScreen(
             )
 
             IconButton(
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(DibuildScreens.TileHelp.name) }
             ) {
                 Icon(
                     imageVector = Icons.Sharp.Info,

@@ -73,7 +73,7 @@ fun LaminateCalcScreen(
                 .fillMaxWidth()
                 .padding(10.dp)
         ) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate(DibuildScreens.History.name) }) {
                 Icon(
                     imageVector = Icons.Sharp.History,
                     contentDescription = null,
@@ -89,7 +89,7 @@ fun LaminateCalcScreen(
             )
 
             IconButton(
-                onClick = { /*TODO*/ }
+                onClick = { navController.navigate(DibuildScreens.LaminateHelp.name) }
             ) {
                 Icon(
                     imageVector = Icons.Sharp.Info,
