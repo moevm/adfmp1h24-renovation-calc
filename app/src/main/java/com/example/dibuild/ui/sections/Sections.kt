@@ -10,6 +10,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
@@ -36,12 +38,27 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.dibuild.DibuildScreens
 import com.example.dibuild.model.ParamsBlock
+import com.example.dibuild.ui.UITools.InfoPageBottomBar
+import com.example.dibuild.ui.UITools.SectionsPageBottomBar
 
 
 @Composable
-fun SectionsCalcScreen() {
-    val SectionsParams = listOf("Ламинат", "Обои", "Плитка", "Электрика", "Сантехника", "Think about it")
+fun SectionsCalcScreen(
+    navController: NavHostController
+) {
+    val SectionsParams =
+        listOf(
+            Pair("Ламинат",DibuildScreens.LaminateCalc),
+            Pair("Обои",DibuildScreens.WallpapersCalc),
+            Pair("Плитка", DibuildScreens.TileCalc),
+            Pair("Электрика", DibuildScreens.ElectricianCalc),
+            Pair("Сантехника", DibuildScreens.PlumbingCalc),
+            Pair("Think about it", DibuildScreens.About),
+        )
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxWidth()
@@ -67,22 +84,41 @@ fun SectionsCalcScreen() {
 
             }
 
-            for (item in SectionsParams) {
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .padding(10.dp)
-                ) {
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                items(SectionsParams) {
+                    Button(onClick = { navController.navigate(it.second.name) }) {
+                        Row(
+                            verticalAlignment = Alignment.CenterVertically,
+                            horizontalArrangement = Arrangement.SpaceBetween,
+                            modifier = Modifier
+                                .padding(10.dp)
+                        ) {
 
-                    Text(
-                        text = item,
-                        fontSize = 30.sp,
-                        textAlign = TextAlign.Center
-                    )
+                            Text(
+                                text = it.first,
+                                fontSize = 30.sp,
+                                textAlign = TextAlign.Center
+                            )
 
+                        }
+                    }
                 }
             }
+
+
+
+
+            Column(
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                SectionsPageBottomBar(navController)
+            }
+
         }
     }
 }
@@ -90,8 +126,8 @@ fun SectionsCalcScreen() {
 
 @Preview
 @Composable
-fun SectionsCalcPreview(){
+fun SectionsCalcPreview() {
     DibuildTheme {
-        SectionsCalcScreen()
+        SectionsCalcScreen(rememberNavController())
     }
 }

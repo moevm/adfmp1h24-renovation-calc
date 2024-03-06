@@ -4,13 +4,51 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.navigation.compose.NavHost
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
-import androidx.compose.material3.Text
+import androidx.navigation.NavHostController
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavDestination
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.example.dibuild.ui.about.AboutCalcScreen
+import com.example.dibuild.ui.electrician.ElectricianCalcScreen
+import com.example.dibuild.ui.laminate.LaminateCalcScreen
+import com.example.dibuild.ui.plumbing.PlumbingCalcScreen
+import com.example.dibuild.ui.sections.SectionsCalcScreen
 import com.example.dibuild.ui.theme.DibuildTheme
+import com.example.dibuild.ui.tile.TileCalcScreen
+import com.example.dibuild.ui.wallpapers.WallpapersCalcHelp
+import com.example.dibuild.ui.wallpapers.WallpapersCalcResult
+import com.example.dibuild.ui.wallpapers.WallpapersCalcScreen
+
+enum class DibuildScreens() {
+    Sections,
+    About,
+    LaminateCalc,
+    LaminateRes,
+    LaminateHelp,
+    LaminateHistory,
+    WallpapersCalc,
+    WallpapersRes,
+    WallpapersHelp,
+    WallpapersHistory,
+    TileCalc,
+    TileRes,
+    TileHelp,
+    TileHistory,
+    ElectricianCalc,
+    ElectricianRes,
+    ElectricianHelp,
+    ElectricianHistory,
+    PlumbingCalc,
+    PlumbingRes,
+    PlumbingHelp,
+    PlumbingHistory,
+}
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +60,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-                    Greeting("Android")
+                    DibuildApp()
                 }
             }
         }
@@ -30,17 +68,60 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
+fun DibuildApp(
+    modifier: Modifier = Modifier,
+    navController: NavHostController = rememberNavController()
+) {
+
+    NavHost(
+        navController = navController,
+        startDestination = DibuildScreens.Sections.name,
+    ) {
+        composable(route = DibuildScreens.Sections.name){
+            SectionsCalcScreen(navController)
+        }
+
+        composable(route = DibuildScreens.About.name){
+            AboutCalcScreen(navController)
+        }
+
+        composable(route = DibuildScreens.LaminateCalc.name){
+            LaminateCalcScreen(navController)
+        }
+
+        composable(route = DibuildScreens.WallpapersCalc.name){
+            WallpapersCalcScreen(navController)
+        }
+        composable(route = DibuildScreens.WallpapersHelp.name){
+            WallpapersCalcHelp(navController)
+        }
+        composable(route = DibuildScreens.WallpapersHistory.name){
+           /*TODO*/
+        }
+
+        composable(route = DibuildScreens.WallpapersRes.name){
+            WallpapersCalcResult(navController)
+        }
+
+        composable(route = DibuildScreens.TileCalc.name){
+            TileCalcScreen(navController)
+        }
+
+        composable(route = DibuildScreens.ElectricianCalc.name){
+            ElectricianCalcScreen(navController)
+        }
+
+        composable(route = DibuildScreens.PlumbingCalc.name){
+            PlumbingCalcScreen(navController)
+        }
+    }
 }
+
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     DibuildTheme {
-        Greeting("Android")
+        DibuildApp()
     }
 }

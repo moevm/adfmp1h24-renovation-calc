@@ -1,5 +1,6 @@
 package com.example.dibuild.ui.UITools
 
+import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
@@ -13,6 +14,7 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.ArrowBack
 import androidx.compose.material.icons.sharp.Download
 import androidx.compose.material.icons.sharp.Menu
+import androidx.compose.material.icons.sharp.Share
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -23,17 +25,23 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.dibuild.DibuildScreens
 import com.example.dibuild.ui.theme.DibuildTheme
 
 @Composable
-fun CalculatePageBottomBar() {
+fun CalculatePageBottomBar(
+    navController: NavHostController,
+    resScreen: String
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxWidth()
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(DibuildScreens.Sections.name) },
             modifier = Modifier.size(100.dp)
         ) {
             Icon(
@@ -45,7 +53,7 @@ fun CalculatePageBottomBar() {
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(resScreen) },
             modifier = Modifier.size(100.dp),
             contentPadding = PaddingValues(0.dp),
         ) {
@@ -74,14 +82,17 @@ fun CalculatePageBottomBar() {
 }
 
 @Composable
-fun CalculateResultsPageBottomBar() {
+fun CalculateResultsPageBottomBar(
+    navController: NavHostController,
+    calcScreen: String,
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxWidth()
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(DibuildScreens.Sections.name) },
             modifier = Modifier.size(100.dp)
         ) {
             Icon(
@@ -97,7 +108,7 @@ fun CalculateResultsPageBottomBar() {
             modifier = Modifier.size(100.dp),
         ) {
             Icon(
-                imageVector = Icons.Sharp.Download,
+                imageVector = Icons.Sharp.Share,
                 contentDescription = null,
                 modifier = Modifier
                     .size(70.dp)
@@ -105,7 +116,7 @@ fun CalculateResultsPageBottomBar() {
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.popBackStack(calcScreen, false) },
             modifier = Modifier.size(100.dp),
 
             ) {
@@ -121,14 +132,16 @@ fun CalculateResultsPageBottomBar() {
 }
 
 @Composable
-fun InfoPageBottomBar() {
+fun InfoPageBottomBar(
+    navController: NavHostController
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
         modifier = Modifier.fillMaxWidth()
     ) {
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.navigate(DibuildScreens.Sections.name) },
             modifier = Modifier.size(100.dp)
         ) {
             Icon(
@@ -140,7 +153,7 @@ fun InfoPageBottomBar() {
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = { navController.popBackStack(DibuildScreens.Sections.name, false) },
             modifier = Modifier.size(100.dp),
 
             ) {
@@ -156,7 +169,9 @@ fun InfoPageBottomBar() {
 }
 
 @Composable
-fun SectionsPageBottomBar() {
+fun SectionsPageBottomBar(
+    navController: NavHostController
+) {
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -182,7 +197,7 @@ fun SectionsPageBottomBar() {
 @Preview
 fun CalculatePageBottomBarPreview(){
     DibuildTheme {
-        CalculatePageBottomBar()
+        CalculatePageBottomBar(rememberNavController(), DibuildScreens.WallpapersRes.name)
     }
 }
 
@@ -190,7 +205,7 @@ fun CalculatePageBottomBarPreview(){
 @Preview
 fun CalculateResultsPageBottomBarPreview(){
     DibuildTheme {
-        CalculateResultsPageBottomBar()
+        CalculateResultsPageBottomBar(rememberNavController(), DibuildScreens.WallpapersCalc.name)
     }
 }
 
@@ -198,7 +213,7 @@ fun CalculateResultsPageBottomBarPreview(){
 @Preview
 fun InfoPageBottomBarPreview(){
     DibuildTheme {
-        InfoPageBottomBar()
+        InfoPageBottomBar(rememberNavController())
     }
 }
 
@@ -206,6 +221,6 @@ fun InfoPageBottomBarPreview(){
 @Preview
 fun SectionsPageBottomBarPreview(){
     DibuildTheme {
-        SectionsPageBottomBar()
+        SectionsPageBottomBar(rememberNavController())
     }
 }
