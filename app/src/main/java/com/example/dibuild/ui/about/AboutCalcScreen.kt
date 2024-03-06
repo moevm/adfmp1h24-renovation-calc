@@ -36,10 +36,17 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.dibuild.ui.UITools.InfoPageBottomBar
+import com.example.dibuild.ui.UITools.SectionsPageBottomBar
 
 
 @Composable
-fun AboutCalcScreen() {
+fun AboutCalcScreen(
+    navController: NavHostController
+) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxWidth()
@@ -94,6 +101,14 @@ fun AboutCalcScreen() {
                 )
 
             }
+
+            Column(
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                InfoPageBottomBar(navController)
+            }
         }
     }
 }
@@ -103,6 +118,6 @@ fun AboutCalcScreen() {
 @Composable
 fun AboutCalcPreview(){
     DibuildTheme {
-        AboutCalcScreen()
+        AboutCalcScreen(rememberNavController())
     }
 }
