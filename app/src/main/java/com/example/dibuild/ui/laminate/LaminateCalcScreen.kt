@@ -220,10 +220,27 @@ fun LaminateCalcHelp(){
     }
 }
 
+
 @Preview
 @Composable
-fun LaminateCalcPreview(){
+fun LaminateCalcResultPreview() {
+    DibuildTheme {
+        LaminateCalcResult()
+    }
+}
+
+@Preview
+@Composable
+fun LaminateCalcPreview() {
     DibuildTheme {
         LaminateCalcScreen(rememberNavController())
+    }
+}
+
+@Preview
+@Composable
+fun LaminateCalcHelpPreview() {
+    DibuildTheme {
+        LaminateCalcHelp()
     }
 }
