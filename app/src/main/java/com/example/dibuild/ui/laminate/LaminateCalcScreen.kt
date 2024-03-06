@@ -240,15 +240,6 @@ fun LaminateCalcHelp(
     }
 }
 
-
-@Preview
-@Composable
-fun LaminateCalcResultPreview() {
-    DibuildTheme {
-        LaminateCalcResult()
-    }
-}
-
 @Preview
 @Composable
 fun LaminateCalcPreview() {
