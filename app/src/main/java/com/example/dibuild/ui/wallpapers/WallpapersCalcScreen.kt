@@ -45,6 +45,7 @@ import com.example.dibuild.ui.UITools.CalculatePageBottomBar
 import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 import com.example.dibuild.ui.UITools.InfoPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
+import com.example.dibuild.ui.UITools.resultCalcCard
 
 
 @Composable
@@ -202,39 +203,8 @@ fun WallpapersCalcResult(
         Box(
             contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()
         ) {
-            Card() {
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.SpaceBetween,
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .fillMaxWidth()
-                ) {
-                    Text(
-                        text = "Расчёт", fontSize = 50.sp, modifier = Modifier.padding(20.dp)
-                    )
+            resultCalcCard(WallpaperCalculatedResult)
 
-                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                        WallpaperCalculatedResult.forEach{item ->
-                            item.results.forEach {result ->
-                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                    Text(
-                                        text = result.name,
-                                        fontSize = 20.sp,
-                                    )
-
-                                    Text(
-                                        text = "${result.value} ${result.unit}",
-                                        fontSize = 20.sp,
-                                    )
-                                    Spacer(modifier = Modifier.padding(5.dp))
-                                }
-                            }
-                            Spacer(modifier = Modifier.padding(20.dp))
-                        }
-                    }
-                }
-            }
             Column(verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize()

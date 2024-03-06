@@ -30,6 +30,8 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.DibuildScreens
+import com.example.dibuild.model.CalculatedResult
+import com.example.dibuild.model.CalculatedResults
 import com.example.dibuild.model.Help
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
@@ -37,6 +39,7 @@ import com.example.dibuild.ui.UITools.CalculatePageBottomBar
 import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 import com.example.dibuild.ui.UITools.InfoPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
+import com.example.dibuild.ui.UITools.resultCalcCard
 import com.example.dibuild.ui.theme.DibuildTheme
 
 
@@ -126,112 +129,42 @@ fun TileCalcResult(
     navController: NavHostController
 ){
 
-    Box(
-        contentAlignment = Alignment.Center,
-        modifier = Modifier.fillMaxSize()
-    ){
-        Card() {
-            Column(
+    val TileCalculatedResult = listOf(
+        CalculatedResults(
+            listOf(
+                CalculatedResult("Количество упаковок\nплитки", "3", "шт"),
+                CalculatedResult("Стоимость", "14499", "₽"),
+                CalculatedResult("Излишки упаковок плитки", "1", "шт"),
+            )
+        ),
+
+        CalculatedResults(
+            listOf(
+                CalculatedResult("Количество упаковок клея","50", "шт"),
+                CalculatedResult("Стоимость","50", "₽"),
+                CalculatedResult("Излишки упаковок клея","1", "шт"),
+            )
+        ),
+
+        CalculatedResults(
+            listOf(
+                CalculatedResult("Итоговая стоимость", "20000", "₽")
+            )
+        )
+    )
+
+    Column {
+        Box(
+            contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()
+        ) {
+            resultCalcCard(TileCalculatedResult)
+
+            Column(verticalArrangement = Arrangement.Bottom,
                 horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-                    .fillMaxWidth()
-            ) {
-                Text(
-                    text = "Расчёт",
-                    fontSize = 50.sp,
-                    modifier = Modifier.padding(20.dp)
-                )
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(
-                        text = "Количество упаковок\nплитки",
-                        fontSize = 20.sp,
-                    )
-
-                    Text(
-                        text = "3 упаковки",
-                        fontSize = 20.sp,)
-                }
-
-                Spacer(modifier = Modifier.padding(20.dp))
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Стоимость",
-                        fontSize = 20.sp,
-                    )
-                    Text(text = "14499 р.",
-                        fontSize = 20.sp,
-                    )
-                }
-
-                Spacer(modifier = Modifier.padding(20.dp))
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Излишки упаковок плитки",
-                        fontSize = 20.sp,
-                    )
-                    Text(
-                        text = "1 упаковка",
-                        fontSize = 20.sp,
-                    )
-                }
-
-                Spacer(modifier = Modifier.padding(20.dp))
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Количество упаковок клея",
-                        fontSize = 20.sp,
-                    )
-                    Text(
-                        text = "1 упаковка",
-                        fontSize = 20.sp,
-                    )
-                }
-
-                Spacer(modifier = Modifier.padding(20.dp))
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Стоимость",
-                        fontSize = 20.sp,
-                    )
-                    Text(
-                        text = "677 р.",
-                        fontSize = 20.sp,
-                    )
-                }
-
-                Spacer(modifier = Modifier.padding(20.dp))
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Излишки упаковок клея",
-                        fontSize = 20.sp,
-                    )
-                    Text(
-                        text = "1 упаковка",
-                        fontSize = 20.sp,
-                    )
-                }
-
-                Spacer(modifier = Modifier.padding(20.dp))
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Итоговая стоимость",
-                        fontSize = 20.sp,
-                    )
-                    Text(
-                        text = "15156 р.",
-                        fontSize = 20.sp,
-                    )
-                }
+                modifier = Modifier.fillMaxSize()
+            ){
+                CalculateResultsPageBottomBar(navController, DibuildScreens.TileCalc.name)
             }
-        }
-
-        Column(verticalArrangement = Arrangement.Bottom,
-            horizontalAlignment = Alignment.CenterHorizontally,
-            modifier = Modifier.fillMaxSize()
-        ){
-            CalculateResultsPageBottomBar(navController, DibuildScreens.TileCalc.name)
         }
     }
 }
