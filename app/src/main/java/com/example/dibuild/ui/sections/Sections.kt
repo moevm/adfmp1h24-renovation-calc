@@ -77,12 +77,20 @@ fun SectionsCalcScreen(
             ) {
 
                 Text(
-                    text = "Разделы",
-                    fontSize = 50.sp,
+                    text = "Строительный\n\nкалькулятор",
+                    fontSize = 48.sp,
                     textAlign = TextAlign.Center
                 )
 
             }
+
+            Text(
+                text = "Разделы",
+                fontSize = 45.sp,
+                textAlign = TextAlign.Center
+            )
+
+            Spacer(modifier = Modifier.padding(10.dp))
 
             LazyColumn(
                 verticalArrangement = Arrangement.spacedBy(10.dp),
