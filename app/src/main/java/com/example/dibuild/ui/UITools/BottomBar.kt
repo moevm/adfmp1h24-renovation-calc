@@ -167,7 +167,8 @@ fun InfoPageBottomBar(
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { navController.popBackStack(DibuildScreens.Sections.name, false) },
+            // DibuildScreens.Sections.name, false
+            onClick = { navController.popBackStack() },
             modifier = Modifier.size(100.dp),
 
             ) {
