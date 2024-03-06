@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,11 +18,16 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.model.Help
+import com.example.dibuild.ui.UITools.InfoPageBottomBar
 
 
 @Composable
-fun HistoryCalc(){
+fun HistoryCalcScreen(
+    navController: NavHostController
+) {
 
     Box(
         contentAlignment = Alignment.Center,
@@ -72,6 +78,14 @@ fun HistoryCalc(){
                     )
                 }
             }
+
+            Column(
+                verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ) {
+                InfoPageBottomBar(navController)
+            }
         }
     }
 }
@@ -81,6 +95,6 @@ fun HistoryCalc(){
 @Composable
 fun HistoryPreview(){
     DibuildTheme {
-        HistoryCalc()
+        HistoryCalcScreen(rememberNavController())
     }
 }
