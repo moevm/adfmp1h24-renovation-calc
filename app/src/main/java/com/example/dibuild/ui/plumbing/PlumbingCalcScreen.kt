@@ -27,8 +27,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.dibuild.DibuildScreens
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
+import com.example.dibuild.ui.UITools.CalculatePageBottomBar
+import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
 import com.example.dibuild.ui.theme.DibuildTheme
 
@@ -93,11 +96,20 @@ fun PlumbingCalcScreen(
         }
 
         inputCalcCard(paramsBlockList = PlumbingParams)
+
+        Column(verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ){
+            CalculatePageBottomBar(navController, DibuildScreens.PlumbingRes.name)
+        }
     }
 }
 
 @Composable
-fun PlumbingCalcResult(){
+fun PlumbingCalcResult(
+    navController: NavHostController
+){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -151,11 +163,20 @@ fun PlumbingCalcResult(){
                 }
             }
         }
+
+        Column(verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ){
+            CalculateResultsPageBottomBar(navController, DibuildScreens.PlumbingCalc.name)
+        }
     }
 }
 
 @Composable
-fun PlumbingCalcHelp(){
+fun PlumbingCalcHelp(
+    navController: NavHostController
+){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -234,7 +255,7 @@ fun PlumbingCalcHelp(){
 @Composable
 fun PlumbingCalcResultPreview() {
     DibuildTheme {
-        PlumbingCalcResult()
+        PlumbingCalcResult(rememberNavController())
     }
 }
 
@@ -250,6 +271,6 @@ fun PlumbingCalcPreview() {
 @Composable
 fun PlumbingCalcHelpPreview() {
     DibuildTheme {
-        PlumbingCalcHelp()
+        PlumbingCalcHelp(rememberNavController())
     }
 }
