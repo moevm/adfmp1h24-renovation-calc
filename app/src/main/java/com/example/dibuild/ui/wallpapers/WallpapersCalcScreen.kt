@@ -43,6 +43,7 @@ import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
 import com.example.dibuild.ui.UITools.CalculatePageBottomBar
 import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
+import com.example.dibuild.ui.UITools.inputCalcCard
 
 
 @Composable
@@ -114,49 +115,50 @@ fun WallpapersCalcScreen(
 
 
         Box(modifier = Modifier.weight(0.9f)) {
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                items(WallpaperParams) {
-                    Card() {
-                        Column(
-                            horizontalAlignment = Alignment.CenterHorizontally,
-                            modifier = Modifier.fillMaxWidth()
-                        ) {
-                            Text(
-                                text = it.name, modifier = Modifier.padding(10.dp), fontSize = 30.sp
-                            )
-
-                            it.params.forEach { param ->
-                                Row(
-                                    verticalAlignment = Alignment.CenterVertically,
-                                    modifier = Modifier.padding(vertical = 8.dp)
-                                ) {
-                                    Text(
-                                        text = param.name,
-                                        fontSize = 25.sp,
-                                        textAlign = TextAlign.Center
-                                    )
-                                    Spacer(modifier = Modifier.padding(10.dp))
-                                    OutlinedTextField(
-                                        value = param.value,
-                                        onValueChange = {/*TODO*/ },
-                                        keyboardOptions = KeyboardOptions.Default.copy(
-                                            keyboardType = KeyboardType.Number,
-                                            imeAction = ImeAction.Next
-                                        ),
-                                        shape = RoundedCornerShape(8.dp),
-                                        modifier = Modifier.width(100.dp)
-                                    )
-                                    Spacer(modifier = Modifier.padding(10.dp))
-                                    Text(
-                                        text = param.unit,
-                                        fontSize = 25.sp,
-                                    )
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            inputCalcCard(paramsBlockList = WallpaperParams)
+//            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+//                items(WallpaperParams) {
+//                    Card() {
+//                        Column(
+//                            horizontalAlignment = Alignment.CenterHorizontally,
+//                            modifier = Modifier.fillMaxWidth()
+//                        ) {
+//                            Text(
+//                                text = it.name, modifier = Modifier.padding(10.dp), fontSize = 30.sp
+//                            )
+//
+//                            it.params.forEach { param ->
+//                                Row(
+//                                    verticalAlignment = Alignment.CenterVertically,
+//                                    modifier = Modifier.padding(vertical = 8.dp)
+//                                ) {
+//                                    Text(
+//                                        text = param.name,
+//                                        fontSize = 25.sp,
+//                                        textAlign = TextAlign.Center
+//                                    )
+//                                    Spacer(modifier = Modifier.padding(10.dp))
+//                                    OutlinedTextField(
+//                                        value = param.value,
+//                                        onValueChange = {/*TODO*/ },
+//                                        keyboardOptions = KeyboardOptions.Default.copy(
+//                                            keyboardType = KeyboardType.Number,
+//                                            imeAction = ImeAction.Next
+//                                        ),
+//                                        shape = RoundedCornerShape(8.dp),
+//                                        modifier = Modifier.width(100.dp)
+//                                    )
+//                                    Spacer(modifier = Modifier.padding(10.dp))
+//                                    Text(
+//                                        text = param.unit,
+//                                        fontSize = 25.sp,
+//                                    )
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
         }
 
         Box(modifier = Modifier.weight(0.135f)) {
