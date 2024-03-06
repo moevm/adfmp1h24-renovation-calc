@@ -33,15 +33,22 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.dibuild.DibuildScreens
 import com.example.dibuild.model.CalculatedResult
 import com.example.dibuild.model.CalculatedResults
 import com.example.dibuild.model.Help
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
+import com.example.dibuild.ui.UITools.CalculatePageBottomBar
+import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 
 
 @Composable
-fun WallpapersCalcScreen() {
+fun WallpapersCalcScreen(
+    navController: NavHostController
+) {
     val WallpaperParams = listOf(
         ParamsBlock(
             "Параметры помещения", listOf(
@@ -106,54 +113,64 @@ fun WallpapersCalcScreen() {
         }
 
 
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-            items(WallpaperParams) {
-                Card() {
-                    Column(
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxWidth()
-                    ) {
-                        Text(
-                            text = it.name, modifier = Modifier.padding(10.dp), fontSize = 30.sp
-                        )
+        Box(modifier = Modifier.weight(0.9f)) {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                items(WallpaperParams) {
+                    Card() {
+                        Column(
+                            horizontalAlignment = Alignment.CenterHorizontally,
+                            modifier = Modifier.fillMaxWidth()
+                        ) {
+                            Text(
+                                text = it.name, modifier = Modifier.padding(10.dp), fontSize = 30.sp
+                            )
 
-                        it.params.forEach { param ->
-                            Row(
-                                verticalAlignment = Alignment.CenterVertically,
-                                modifier = Modifier.padding(vertical = 8.dp)
-                            ) {
-                                Text(
-                                    text = param.name,
-                                    fontSize = 25.sp,
-                                    textAlign = TextAlign.Center
-                                )
-                                Spacer(modifier = Modifier.padding(10.dp))
-                                OutlinedTextField(
-                                    value = param.value,
-                                    onValueChange = {/*TODO*/ },
-                                    keyboardOptions = KeyboardOptions.Default.copy(
-                                        keyboardType = KeyboardType.Number,
-                                        imeAction = ImeAction.Next
-                                    ),
-                                    shape = RoundedCornerShape(8.dp),
-                                    modifier = Modifier.width(100.dp)
-                                )
-                                Spacer(modifier = Modifier.padding(10.dp))
-                                Text(
-                                    text = param.unit,
-                                    fontSize = 25.sp,
-                                )
+                            it.params.forEach { param ->
+                                Row(
+                                    verticalAlignment = Alignment.CenterVertically,
+                                    modifier = Modifier.padding(vertical = 8.dp)
+                                ) {
+                                    Text(
+                                        text = param.name,
+                                        fontSize = 25.sp,
+                                        textAlign = TextAlign.Center
+                                    )
+                                    Spacer(modifier = Modifier.padding(10.dp))
+                                    OutlinedTextField(
+                                        value = param.value,
+                                        onValueChange = {/*TODO*/ },
+                                        keyboardOptions = KeyboardOptions.Default.copy(
+                                            keyboardType = KeyboardType.Number,
+                                            imeAction = ImeAction.Next
+                                        ),
+                                        shape = RoundedCornerShape(8.dp),
+                                        modifier = Modifier.width(100.dp)
+                                    )
+                                    Spacer(modifier = Modifier.padding(10.dp))
+                                    Text(
+                                        text = param.unit,
+                                        fontSize = 25.sp,
+                                    )
+                                }
                             }
                         }
                     }
                 }
             }
         }
+
+        Box(modifier = Modifier.weight(0.135f)) {
+            CalculatePageBottomBar(navController, DibuildScreens.WallpapersRes.name)
+        }
+
+
     }
 }
 
 @Composable
-fun WallpapersCalcResult() {
+fun WallpapersCalcResult(
+    navController: NavHostController
+) {
 
     val WallpaperCalculatedResult = listOf(
         CalculatedResults(
@@ -178,47 +195,57 @@ fun WallpapersCalcResult() {
             )
         )
     )
-    Box(
-        contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()
-    ) {
-        Card() {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-                    .fillMaxWidth()
-            ) {
-                Text(
-                    text = "Расчёт", fontSize = 50.sp, modifier = Modifier.padding(20.dp)
-                )
+    Column {
+        Box(
+            contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()
+        ) {
+            Card() {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.SpaceBetween,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .fillMaxWidth()
+                ) {
+                    Text(
+                        text = "Расчёт", fontSize = 50.sp, modifier = Modifier.padding(20.dp)
+                    )
 
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    WallpaperCalculatedResult.forEach{item ->
-                        item.results.forEach {result ->
-                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                                Text(
-                                    text = result.name,
-                                    fontSize = 20.sp,
-                                )
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        WallpaperCalculatedResult.forEach{item ->
+                            item.results.forEach {result ->
+                                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                    Text(
+                                        text = result.name,
+                                        fontSize = 20.sp,
+                                    )
 
-                                Text(
-                                    text = "${result.value} ${result.unit}",
-                                    fontSize = 20.sp,
-                                )
-                                Spacer(modifier = Modifier.padding(5.dp))
+                                    Text(
+                                        text = "${result.value} ${result.unit}",
+                                        fontSize = 20.sp,
+                                    )
+                                    Spacer(modifier = Modifier.padding(5.dp))
+                                }
                             }
+                            Spacer(modifier = Modifier.padding(20.dp))
                         }
-                        Spacer(modifier = Modifier.padding(20.dp))
                     }
                 }
+            }
+            Column(verticalArrangement = Arrangement.Bottom,
+                horizontalAlignment = Alignment.CenterHorizontally,
+                modifier = Modifier.fillMaxSize()
+            ){
+                CalculateResultsPageBottomBar(navController, DibuildScreens.WallpapersCalc.name)
             }
         }
     }
 }
 
 @Composable
-fun WallpapersCalcHelp(){
+fun WallpapersCalcHelp(
+    navController: NavHostController
+){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -297,7 +324,7 @@ fun WallpapersCalcHelp(){
 @Composable
 fun WallpapersCalcResultPreview() {
     DibuildTheme {
-        WallpapersCalcResult()
+        WallpapersCalcResult(rememberNavController())
     }
 }
 
@@ -305,7 +332,7 @@ fun WallpapersCalcResultPreview() {
 @Composable
 fun WallpapersCalcPreview() {
     DibuildTheme {
-        WallpapersCalcScreen()
+        WallpapersCalcScreen(rememberNavController())
     }
 }
 
@@ -313,6 +340,6 @@ fun WallpapersCalcPreview() {
 @Composable
 fun WallpapersCalcHelpPreview() {
     DibuildTheme {
-        WallpapersCalcHelp()
+        WallpapersCalcHelp(rememberNavController())
     }
 }

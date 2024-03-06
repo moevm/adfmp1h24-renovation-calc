@@ -26,6 +26,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
 import com.example.dibuild.ui.UITools.cardParamLazy
@@ -33,7 +35,9 @@ import com.example.dibuild.ui.UITools.cardParamLazy
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun ElectricianCalcScreen() {
+fun ElectricianCalcScreen(
+    navController: NavHostController
+) {
 
     val ElectricianParams = listOf(
         ParamsBlock(
@@ -292,7 +296,7 @@ fun ElectricianCalcHelp(){
 @Composable
 fun ElectricianCalcPreview(){
     DibuildTheme {
-        ElectricianCalcScreen()
+        ElectricianCalcScreen(rememberNavController())
 //        ElectricianCalcResult()
     }
 }

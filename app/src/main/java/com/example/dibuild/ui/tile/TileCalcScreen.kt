@@ -38,6 +38,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
 import com.example.dibuild.model.Help
@@ -45,7 +46,9 @@ import com.example.dibuild.model.Help
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun TileCalcScreen() {
+fun TileCalcScreen(
+    navController: NavHostController
+) {
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
