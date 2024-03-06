@@ -89,7 +89,7 @@ fun WallpapersCalcScreen(
                 .fillMaxWidth()
                 .padding(10.dp)
         ) {
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate(DibuildScreens.History.name) }) {
                 Icon(
                     imageVector = Icons.Sharp.History,
                     contentDescription = null,
@@ -103,7 +103,7 @@ fun WallpapersCalcScreen(
                 fontSize = 30.sp,
             )
 
-            IconButton(onClick = { /*TODO*/ }) {
+            IconButton(onClick = { navController.navigate(DibuildScreens.WallpapersHelp.name) }) {
                 Icon(
                     imageVector = Icons.Sharp.Info,
                     contentDescription = null,
