@@ -145,16 +145,6 @@ fun ElectricianCalcResult(
 
                     Text(
                         text = "5000 ₽",
-                        fontSize = 20.sp,)
-                }
-
-                Spacer(modifier = Modifier.padding(20.dp))
-
-                Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Стоимость короба",
-                        fontSize = 20.sp,
-                    )
-                    Text(text = "2456 ₽",
                         fontSize = 20.sp,
                     )
                 }
@@ -162,7 +152,21 @@ fun ElectricianCalcResult(
                 Spacer(modifier = Modifier.padding(20.dp))
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Стоимость выключателей",
+                    Text(
+                        text = "Стоимость короба",
+                        fontSize = 20.sp,
+                    )
+                    Text(
+                        text = "2456 ₽",
+                        fontSize = 20.sp,
+                    )
+                }
+
+                Spacer(modifier = Modifier.padding(20.dp))
+
+                Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                    Text(
+                        text = "Стоимость выключателей",
                         fontSize = 20.sp,
                     )
                     Text(
@@ -174,7 +178,8 @@ fun ElectricianCalcResult(
                 Spacer(modifier = Modifier.padding(20.dp))
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Стоимость розеток",
+                    Text(
+                        text = "Стоимость розеток",
                         fontSize = 20.sp,
                     )
                     Text(
@@ -186,7 +191,8 @@ fun ElectricianCalcResult(
                 Spacer(modifier = Modifier.padding(20.dp))
 
                 Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                    Text(text = "Итоговая стоимость",
+                    Text(
+                        text = "Итоговая стоимость",
                         fontSize = 20.sp,
                     )
                     Text(
@@ -195,21 +201,12 @@ fun ElectricianCalcResult(
                     )
                 }
             }
-<<<<<<< HEAD
-            Column(verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
-            ){
-                CalculateResultsPageBottomBar(navController, DibuildScreens.ElectricianCalc.name)
-            }
-=======
         }
         Column(verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize()
         ){
             CalculateResultsPageBottomBar(navController, DibuildScreens.ElectricianCalc.name)
->>>>>>> cdf73726be90be499b943d963cb5c3771a326053
         }
     }
 }
