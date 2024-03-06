@@ -195,12 +195,12 @@ fun ElectricianCalcResult(
                     )
                 }
             }
-            Column(verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
-            ){
-                CalculateResultsPageBottomBar(navController, DibuildScreens.ElectricianRes.name)
-            }
+        }
+        Column(verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ){
+            CalculateResultsPageBottomBar(navController, DibuildScreens.ElectricianCalc.name)
         }
     }
 }
