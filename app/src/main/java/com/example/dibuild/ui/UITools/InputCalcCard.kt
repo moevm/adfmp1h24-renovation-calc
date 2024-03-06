@@ -26,7 +26,7 @@ import com.example.dibuild.model.ParamsBlock
 
 
 @Composable
-fun cardParamLazy(paramsBlockList:List<ParamsBlock>){
+fun inputCalcCard(paramsBlockList:List<ParamsBlock>){
     LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         items(paramsBlockList) {
             Card() {

@@ -39,9 +39,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
 import com.example.dibuild.model.Help
+import com.example.dibuild.ui.UITools.inputCalcCard
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -49,6 +51,31 @@ import com.example.dibuild.model.Help
 fun TileCalcScreen(
     navController: NavHostController
 ) {
+    val TileParams = listOf(
+        ParamsBlock(
+            "Параметры помещения", listOf(
+                Param("Длина комнаты", "10", "м"),
+                Param("Ширина комнаты", "10", "м"),
+            )
+        ),
+
+        ParamsBlock(
+            "Параметры плитки", listOf(
+                Param("Длина одной\nплитки", "2", "м"),
+                Param("Ширина одной\nплитки", "1", "м"),
+                Param("Количество в\nупаковке", "20", "шт"),
+                Param("Цена за упаковку", "3000", "₽"),
+            )
+        ),
+
+        ParamsBlock(
+            "Параметры клея", listOf(
+                Param("Масса упаковки\nклея", "1000", "г"),
+                Param("Цена упаковки\nклея", "236", "₽"),
+                Param("Расход клея", "60", "г/м2"),
+            )
+        )
+    )
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -90,279 +117,7 @@ fun TileCalcScreen(
             }
         }
 
-        Card()
-        {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text(
-                    text = "Параметры помещения",
-                    modifier = Modifier.padding(10.dp),
-                    fontSize = 30.sp
-                )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                ) {
-                    Text(
-                        text = "Длина комнаты",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "10",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Ширина комнаты",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "10",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.padding(10.dp))
-
-        Card() {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text(
-                    text = "Параметры плитки",
-                    modifier = Modifier.padding(10.dp),
-                    fontSize = 30.sp
-                )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Длина одной\nплитки",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "2.15",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Ширина одной\nплитки",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "0.15",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Количество в\nупаковке",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "20",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "шт",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Цена за\nупаковку",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-
-                    OutlinedTextField(
-                        value = "678",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Done
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "Р",
-                        fontSize = 25.sp,
-                    )
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.padding(10.dp))
-
-        Card() {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text(
-                    text = "Параметры клея",
-                    modifier = Modifier.padding(10.dp),
-                    fontSize = 30.sp
-                )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Масса упаковки\nклея",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "2.15",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "г",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Цена упаковки\nклея",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "0.15",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "Р",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Расход клея",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "20",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "г/м^2",
-                        fontSize = 25.sp,
-                    )
-                }
-            }
-        }
+        inputCalcCard(paramsBlockList = TileParams)
     }
 }
 
@@ -556,6 +311,6 @@ fun TileCalcHelp(){
 @Composable
 fun TileCalcPreview(){
     DibuildTheme {
-        TileCalcHelp()
+        TileCalcScreen(rememberNavController())
     }
 }

@@ -9,31 +9,19 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.History
 import androidx.compose.material.icons.sharp.Info
-import androidx.compose.material3.AlertDialog
-import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.ExperimentalMaterial3Api
-import com.example.dibuild.ui.theme.DibuildTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,12 +29,34 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.model.Help
+import com.example.dibuild.model.Param
+import com.example.dibuild.model.ParamsBlock
+import com.example.dibuild.ui.UITools.inputCalcCard
+import com.example.dibuild.ui.theme.DibuildTheme
 
 
 @Composable
 fun LaminateCalcScreen(
     navController: NavHostController
 ) {
+    val LaminateParams = listOf(
+        ParamsBlock(
+            "Параметры помещения", listOf(
+                Param("Длина комнаты", "10", "м"),
+                Param("Ширина комнаты", "10", "м"),
+            )
+        ),
+
+        ParamsBlock(
+            "Параметры ламината", listOf(
+                Param("Длина доски", "2", "м"),
+                Param("Ширина доски", "1", "м"),
+                Param("Количество в\nупаковке", "20", "шт"),
+                Param("Цена", "3000", "₽/м2"),
+            )
+        ),
+    )
+
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -88,188 +98,7 @@ fun LaminateCalcScreen(
             }
         }
 
-        Card()
-        {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text(
-                    text = "Параметры помещения",
-                    modifier = Modifier.padding(10.dp),
-                    fontSize = 30.sp
-                )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                ) {
-                    Text(
-                        text = "Длина комнаты",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "10",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Ширина комнаты",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "10",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-            }
-        }
-
-        Spacer(modifier = Modifier.padding(10.dp))
-
-        Card() {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text(
-                    text = "Параметры ламината",
-                    modifier = Modifier.padding(10.dp),
-                    fontSize = 30.sp
-                )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Длина доски",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "2.15",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Ширина доски",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "0.15",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Количество в\nупаковке",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "20",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "шт",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Цена",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-
-                    OutlinedTextField(
-                        value = "678",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Done
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "Р/м2",
-                        fontSize = 25.sp,
-                    )
-                }
-            }
-        }
+        inputCalcCard(paramsBlockList = LaminateParams)
     }
 }
 
@@ -395,6 +224,6 @@ fun LaminateCalcHelp(){
 @Composable
 fun LaminateCalcPreview(){
     DibuildTheme {
-        LaminateCalcHelp()
+        LaminateCalcScreen(rememberNavController())
     }
 }

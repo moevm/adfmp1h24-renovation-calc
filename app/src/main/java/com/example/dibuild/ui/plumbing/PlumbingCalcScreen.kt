@@ -17,7 +17,6 @@ import androidx.compose.material.icons.sharp.History
 import androidx.compose.material.icons.sharp.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import com.example.dibuild.ui.theme.DibuildTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
@@ -33,6 +32,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
+import com.example.dibuild.model.Param
+import com.example.dibuild.model.ParamsBlock
+import com.example.dibuild.ui.UITools.inputCalcCard
+import com.example.dibuild.ui.theme.DibuildTheme
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -40,6 +44,19 @@ import androidx.navigation.NavHostController
 fun PlumbingCalcScreen(
     navController: NavHostController
 ) {
+    val PlumbingParams = listOf(
+        ParamsBlock(
+            "Параметры сантехники", listOf(
+                Param("Длина труб", "10", "м"),
+                Param("Цена труб", "10", "₽/м"),
+                Param("Количество\nвентилей", "10", "шт"),
+                Param("Цена вентиля", "10", "₽"),
+                Param("Цена счетчика", "10", "₽"),
+                Param("Цена фильтра", "10", "₽"),
+            )
+        ),
+    )
+
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -81,172 +98,7 @@ fun PlumbingCalcScreen(
             }
         }
 
-        Card()
-        {
-            Column(
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxWidth()
-            )
-            {
-                Text(
-                    text = "Параметры сантехники",
-                    modifier = Modifier.padding(10.dp),
-                    fontSize = 30.sp
-                )
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                    modifier = Modifier.padding(vertical = 8.dp)
-                ) {
-                    Text(
-                        text = "Длина труб",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "10",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "м",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Цена труб",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "10",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "₽/м",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Количество\nвентилей",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "5",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "шт",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Цена вентилей",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "50",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "₽",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Цена счетчика",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    OutlinedTextField(
-                        value = "50",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Next
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "₽",
-                        fontSize = 25.sp,
-                    )
-                }
-
-                Row(
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    Text(
-                        text = "Цена фильтра",
-                        fontSize = 25.sp,
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-
-                    OutlinedTextField(
-                        value = "50",
-                        onValueChange = {/*TODO*/ },
-                        keyboardOptions = KeyboardOptions.Default.copy(
-                            keyboardType = KeyboardType.Number,
-                            imeAction = ImeAction.Done
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        modifier = Modifier.width(100.dp)
-                    )
-                    Spacer(modifier = Modifier.padding(10.dp))
-                    Text(
-                        text = "₽",
-                        fontSize = 25.sp,
-                    )
-                }
-            }
-        }
+        inputCalcCard(paramsBlockList = PlumbingParams)
     }
 }
 
@@ -388,6 +240,6 @@ fun PlumbingCalcHelp(){
 @Composable
 fun PlumbingCalcPreview(){
     DibuildTheme {
-        PlumbingCalcHelp()
+        PlumbingCalcScreen(rememberNavController())
     }
 }

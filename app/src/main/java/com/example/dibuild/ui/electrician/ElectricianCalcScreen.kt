@@ -30,7 +30,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
-import com.example.dibuild.ui.UITools.cardParamLazy
+import com.example.dibuild.ui.UITools.inputCalcCard
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -101,7 +101,7 @@ fun ElectricianCalcScreen(
             }
         }
 
-        cardParamLazy(paramsBlockList = ElectricianParams)
+        inputCalcCard(paramsBlockList = ElectricianParams)
     }
 }
 
