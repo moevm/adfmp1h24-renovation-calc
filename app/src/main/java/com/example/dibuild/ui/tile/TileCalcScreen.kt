@@ -29,9 +29,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.dibuild.DibuildScreens
 import com.example.dibuild.model.Help
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
+import com.example.dibuild.ui.UITools.CalculatePageBottomBar
+import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
 import com.example.dibuild.ui.theme.DibuildTheme
 
@@ -107,12 +110,20 @@ fun TileCalcScreen(
             }
         }
 
-        inputCalcCard(paramsBlockList = TileParams)
+        Box(modifier = Modifier.weight(0.9f)) {
+            inputCalcCard(paramsBlockList = TileParams)
+        }
+
+        Box(modifier = Modifier.weight(0.135f)) {
+            CalculatePageBottomBar(navController, DibuildScreens.TileRes.name)
+        }
     }
 }
 
 @Composable
-fun TileCalcResult(){
+fun TileCalcResult(
+    navController: NavHostController
+){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -214,11 +225,20 @@ fun TileCalcResult(){
                 }
             }
         }
+
+        Column(verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ){
+            CalculateResultsPageBottomBar(navController, DibuildScreens.TileCalc.name)
+        }
     }
 }
 
 @Composable
-fun TileCalcHelp(){
+fun TileCalcHelp(
+    navController: NavHostController
+){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -301,7 +321,7 @@ fun TileCalcHelp(){
 @Composable
 fun TileCalcResultPreview() {
     DibuildTheme {
-        TileCalcResult()
+        TileCalcResult(rememberNavController())
     }
 }
 
@@ -317,6 +337,6 @@ fun TileCalcPreview() {
 @Composable
 fun TileCalcHelpPreview() {
     DibuildTheme {
-        TileCalcHelp()
+        TileCalcHelp(rememberNavController())
     }
 }

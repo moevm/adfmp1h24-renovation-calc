@@ -23,6 +23,8 @@ import com.example.dibuild.ui.laminate.LaminateCalcScreen
 import com.example.dibuild.ui.plumbing.PlumbingCalcScreen
 import com.example.dibuild.ui.sections.SectionsCalcScreen
 import com.example.dibuild.ui.theme.DibuildTheme
+import com.example.dibuild.ui.tile.TileCalcHelp
+import com.example.dibuild.ui.tile.TileCalcResult
 import com.example.dibuild.ui.tile.TileCalcScreen
 import com.example.dibuild.ui.wallpapers.WallpapersCalcHelp
 import com.example.dibuild.ui.wallpapers.WallpapersCalcResult
@@ -114,6 +116,14 @@ fun DibuildApp(
 
         composable(route = DibuildScreens.TileCalc.name){
             TileCalcScreen(navController)
+        }
+
+        composable(route = DibuildScreens.TileHelp.name){
+            TileCalcHelp(navController)
+        }
+
+        composable(route = DibuildScreens.TileRes.name){
+            TileCalcResult(navController)
         }
 
         composable(route = DibuildScreens.ElectricianCalc.name){
