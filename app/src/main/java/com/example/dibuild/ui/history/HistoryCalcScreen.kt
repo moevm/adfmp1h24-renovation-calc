@@ -86,7 +86,7 @@ fun HistoryCalcScreen(
                 horizontalAlignment = Alignment.CenterHorizontally,
                 modifier = Modifier.fillMaxSize()
             ) {
-                CalculateResultsPageBottomBar(navController, DibuildScreens.History.name)
+                CalculateResultsPageBottomBar(navController, "")
             }
         }
     }

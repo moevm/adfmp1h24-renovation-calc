@@ -115,18 +115,32 @@ fun CalculateResultsPageBottomBar(
             )
         }
         Spacer(modifier = Modifier.padding(10.dp))
-        Button(
-            onClick = { navController.popBackStack(calcScreen, false) },
-            modifier = Modifier.size(100.dp),
+        if (calcScreen == "")
+            Button(
+                onClick = { navController.popBackStack() },
+                modifier = Modifier.size(100.dp),
 
-            ) {
-            Icon(
-                imageVector = Icons.Sharp.ArrowBack,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(70.dp)
-            )
-        }
+                ) {
+                Icon(
+                    imageVector = Icons.Sharp.ArrowBack,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(70.dp)
+                )
+            }
+        else
+            Button(
+                onClick = { navController.popBackStack(calcScreen, false) },
+                modifier = Modifier.size(100.dp),
+
+                ) {
+                Icon(
+                    imageVector = Icons.Sharp.ArrowBack,
+                    contentDescription = null,
+                    modifier = Modifier
+                        .size(70.dp)
+                )
+            }
     }
 
 }
