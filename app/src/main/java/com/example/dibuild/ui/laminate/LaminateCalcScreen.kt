@@ -34,6 +34,7 @@ import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
 import com.example.dibuild.ui.UITools.CalculatePageBottomBar
 import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
+import com.example.dibuild.ui.UITools.InfoPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
 import com.example.dibuild.ui.theme.DibuildTheme
 
@@ -229,12 +230,16 @@ fun LaminateCalcHelp(
                 )
             )
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(0.9f)) {
                 items(LaminateHelpParams) {
                     Text(
                         text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
                     )
                 }
+            }
+
+            Box(modifier = Modifier.weight(0.15f)) {
+                InfoPageBottomBar(navController)
             }
         }
     }
