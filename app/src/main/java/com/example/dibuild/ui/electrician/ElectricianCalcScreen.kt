@@ -14,7 +14,6 @@ import androidx.compose.material.icons.sharp.History
 import androidx.compose.material.icons.sharp.Info
 import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
-import com.example.dibuild.ui.theme.DibuildTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
@@ -31,6 +30,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
 import com.example.dibuild.ui.UITools.inputCalcCard
+import com.example.dibuild.ui.theme.DibuildTheme
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -292,11 +292,28 @@ fun ElectricianCalcHelp(){
         }
     }
 }
+
 @Preview
 @Composable
-fun ElectricianCalcPreview(){
+fun ElectricianCalcResultPreview() {
     DibuildTheme {
-        ElectricianCalcScreen(rememberNavController())
-//        ElectricianCalcResult()
+        ElectricianCalcResult()
     }
 }
+
+@Preview
+@Composable
+fun ElectricianCalcPreview() {
+    DibuildTheme {
+        ElectricianCalcScreen(rememberNavController())
+    }
+}
+
+@Preview
+@Composable
+fun ElectricianCalcHelpPreview() {
+    DibuildTheme {
+        ElectricianCalcHelp()
+    }
+}
+
