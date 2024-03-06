@@ -17,6 +17,8 @@ import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.ui.about.AboutCalcScreen
 import com.example.dibuild.ui.electrician.ElectricianCalcScreen
 import com.example.dibuild.ui.history.HistoryCalcScreen
+import com.example.dibuild.ui.laminate.LaminateCalcHelp
+import com.example.dibuild.ui.laminate.LaminateCalcResult
 import com.example.dibuild.ui.laminate.LaminateCalcScreen
 import com.example.dibuild.ui.plumbing.PlumbingCalcScreen
 import com.example.dibuild.ui.sections.SectionsCalcScreen
@@ -90,9 +92,18 @@ fun DibuildApp(
             LaminateCalcScreen(navController)
         }
 
+        composable(route = DibuildScreens.LaminateHelp.name){
+            LaminateCalcHelp(navController)
+        }
+
+        composable(route = DibuildScreens.LaminateRes.name){
+            LaminateCalcResult(navController)
+        }
+
         composable(route = DibuildScreens.WallpapersCalc.name){
             WallpapersCalcScreen(navController)
         }
+
         composable(route = DibuildScreens.WallpapersHelp.name){
             WallpapersCalcHelp(navController)
         }

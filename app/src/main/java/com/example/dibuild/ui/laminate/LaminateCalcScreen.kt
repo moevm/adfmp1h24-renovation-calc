@@ -28,9 +28,12 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
+import com.example.dibuild.DibuildScreens
 import com.example.dibuild.model.Help
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
+import com.example.dibuild.ui.UITools.CalculatePageBottomBar
+import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
 import com.example.dibuild.ui.theme.DibuildTheme
 
@@ -99,11 +102,20 @@ fun LaminateCalcScreen(
         }
 
         inputCalcCard(paramsBlockList = LaminateParams)
+
+        Column(verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ){
+            CalculatePageBottomBar(navController, DibuildScreens.LaminateRes.name)
+        }
     }
 }
 
 @Composable
-fun LaminateCalcResult(){
+fun LaminateCalcResult(
+    navController: NavHostController
+){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -157,11 +169,19 @@ fun LaminateCalcResult(){
                 }
             }
         }
+        Column(verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ){
+            CalculateResultsPageBottomBar(navController, DibuildScreens.LaminateCalc.name)
+        }
     }
 }
 
 @Composable
-fun LaminateCalcHelp(){
+fun LaminateCalcHelp(
+    navController: NavHostController
+){
 
     Box(
         contentAlignment = Alignment.Center,
@@ -225,5 +245,21 @@ fun LaminateCalcHelp(){
 fun LaminateCalcPreview(){
     DibuildTheme {
         LaminateCalcScreen(rememberNavController())
+    }
+}
+
+@Preview
+@Composable
+fun LaminateCalcResultPreview(){
+    DibuildTheme {
+        LaminateCalcResult(rememberNavController())
+    }
+}
+
+@Preview
+@Composable
+fun LaminateCalcHelpPreview(){
+    DibuildTheme {
+        LaminateCalcHelp(rememberNavController())
     }
 }
