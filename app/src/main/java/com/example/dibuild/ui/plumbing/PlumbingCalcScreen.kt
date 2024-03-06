@@ -9,6 +9,8 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.History
 import androidx.compose.material.icons.sharp.Info
@@ -28,10 +30,12 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.DibuildScreens
+import com.example.dibuild.model.Help
 import com.example.dibuild.model.Param
 import com.example.dibuild.model.ParamsBlock
 import com.example.dibuild.ui.UITools.CalculatePageBottomBar
 import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
+import com.example.dibuild.ui.UITools.InfoPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
 import com.example.dibuild.ui.theme.DibuildTheme
 
@@ -202,50 +206,30 @@ fun PlumbingCalcHelp(
                 )
 
             }
+            val PlumbingHelpParams = listOf(
+                Help(
+                    "Стоимость труб =\nдлина труб * цена трубы"
+                ),
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(20.dp)
-            ) {
+                Help(
+                    "Стоимость вентилей =\nколичество вентилей * цена вентиля"
+                ),
 
-                Text(
-                    text = "Стоимость труб =\n длина труб * цена трубы",
-                    fontSize = 30.sp,
-                    textAlign = TextAlign.Center
+                Help(
+                    "Итого:\nСтоимость труб + Стоимость вентилей + Стоимость счетчика + Стоимость фильтра"
                 )
+            )
 
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(0.9f)) {
+                items(PlumbingHelpParams) {
+                    Text(
+                        text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
+                    )
+                }
             }
 
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
-
-                Text(
-                    text = "Стоимость вентилей =\n количество вентилей * цена вентиля",
-                    fontSize = 30.sp,
-                    textAlign = TextAlign.Center
-                )
-
-            }
-
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.SpaceBetween,
-                modifier = Modifier
-                    .padding(10.dp)
-            ) {
-
-                Text(
-                    text = "Итого:\nСтоимость труб + Стоимость вентилей + Стоимость счетчика + Стоимость фильтра",
-                    fontSize = 30.sp,
-                    textAlign = TextAlign.Center
-                )
-
+            Box(modifier = Modifier.weight(0.15f)) {
+                InfoPageBottomBar(navController)
             }
         }
     }
