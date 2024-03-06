@@ -16,6 +16,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.ui.about.AboutCalcScreen
 import com.example.dibuild.ui.electrician.ElectricianCalcScreen
+import com.example.dibuild.ui.history.HistoryCalcScreen
 import com.example.dibuild.ui.laminate.LaminateCalcScreen
 import com.example.dibuild.ui.plumbing.PlumbingCalcScreen
 import com.example.dibuild.ui.sections.SectionsCalcScreen
@@ -28,26 +29,22 @@ import com.example.dibuild.ui.wallpapers.WallpapersCalcScreen
 enum class DibuildScreens() {
     Sections,
     About,
+    History,
     LaminateCalc,
     LaminateRes,
     LaminateHelp,
-    LaminateHistory,
     WallpapersCalc,
     WallpapersRes,
     WallpapersHelp,
-    WallpapersHistory,
     TileCalc,
     TileRes,
     TileHelp,
-    TileHistory,
     ElectricianCalc,
     ElectricianRes,
     ElectricianHelp,
-    ElectricianHistory,
     PlumbingCalc,
     PlumbingRes,
     PlumbingHelp,
-    PlumbingHistory,
 }
 
 class MainActivity : ComponentActivity() {
@@ -85,6 +82,10 @@ fun DibuildApp(
             AboutCalcScreen(navController)
         }
 
+        composable(route = DibuildScreens.History.name){
+            HistoryCalcScreen(navController)
+        }
+
         composable(route = DibuildScreens.LaminateCalc.name){
             LaminateCalcScreen(navController)
         }
@@ -94,9 +95,6 @@ fun DibuildApp(
         }
         composable(route = DibuildScreens.WallpapersHelp.name){
             WallpapersCalcHelp(navController)
-        }
-        composable(route = DibuildScreens.WallpapersHistory.name){
-           /*TODO*/
         }
 
         composable(route = DibuildScreens.WallpapersRes.name){
