@@ -114,11 +114,11 @@ fun TileCalcScreen(
             }
         }
 
-        Box(modifier = Modifier.weight(0.9f)) {
+        Box(modifier = Modifier.weight(1f)) {
             inputCalcCard(paramsBlockList = TileParams)
         }
 
-        Box(modifier = Modifier.weight(0.135f)) {
+        Box() {
             CalculatePageBottomBar(navController, DibuildScreens.TileRes.name)
         }
     }
@@ -240,7 +240,7 @@ fun TileCalcHelp(
                 )
             )
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(0.9f)) {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(1f)) {
                 items(TileHelpParams) {
                     Text(
                         text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
@@ -248,7 +248,7 @@ fun TileCalcHelp(
                 }
             }
 
-            Box(modifier = Modifier.weight(0.15f)) {
+            Box() {
                 InfoPageBottomBar(navController)
             }
         }

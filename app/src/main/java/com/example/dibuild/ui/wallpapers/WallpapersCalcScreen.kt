@@ -17,11 +17,14 @@ import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.History
 import androidx.compose.material.icons.sharp.Info
+import androidx.compose.material3.BottomAppBar
+import androidx.compose.material3.BottomAppBarDefaults
 import androidx.compose.material3.Card
 import com.example.dibuild.ui.theme.DibuildTheme
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -81,7 +84,6 @@ fun WallpapersCalcScreen(
     Column(
         verticalArrangement = Arrangement.Top,
         horizontalAlignment = Alignment.CenterHorizontally,
-
         ) {
 
         Row(
@@ -116,54 +118,11 @@ fun WallpapersCalcScreen(
         }
 
 
-        Box(modifier = Modifier.weight(0.9f)) {
+        Box(modifier = Modifier.weight(1f)) {
             inputCalcCard(paramsBlockList = WallpaperParams)
-//            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-//                items(WallpaperParams) {
-//                    Card() {
-//                        Column(
-//                            horizontalAlignment = Alignment.CenterHorizontally,
-//                            modifier = Modifier.fillMaxWidth()
-//                        ) {
-//                            Text(
-//                                text = it.name, modifier = Modifier.padding(10.dp), fontSize = 30.sp
-//                            )
-//
-//                            it.params.forEach { param ->
-//                                Row(
-//                                    verticalAlignment = Alignment.CenterVertically,
-//                                    modifier = Modifier.padding(vertical = 8.dp)
-//                                ) {
-//                                    Text(
-//                                        text = param.name,
-//                                        fontSize = 25.sp,
-//                                        textAlign = TextAlign.Center
-//                                    )
-//                                    Spacer(modifier = Modifier.padding(10.dp))
-//                                    OutlinedTextField(
-//                                        value = param.value,
-//                                        onValueChange = {/*TODO*/ },
-//                                        keyboardOptions = KeyboardOptions.Default.copy(
-//                                            keyboardType = KeyboardType.Number,
-//                                            imeAction = ImeAction.Next
-//                                        ),
-//                                        shape = RoundedCornerShape(8.dp),
-//                                        modifier = Modifier.width(100.dp)
-//                                    )
-//                                    Spacer(modifier = Modifier.padding(10.dp))
-//                                    Text(
-//                                        text = param.unit,
-//                                        fontSize = 25.sp,
-//                                    )
-//                                }
-//                            }
-//                        }
-//                    }
-//                }
-//            }
         }
 
-        Box(modifier = Modifier.weight(0.135f)) {
+        Box() {
             CalculatePageBottomBar(navController, DibuildScreens.WallpapersRes.name)
         }
 
@@ -282,7 +241,7 @@ fun WallpapersCalcHelp(
                 )
             )
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(0.9f)) {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(1f)) {
                 items(WallpaperHelpParams) {
                     Text(
                         text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
@@ -290,7 +249,7 @@ fun WallpapersCalcHelp(
                 }
             }
 
-            Box(modifier = Modifier.weight(0.15f)) {
+            Box() {
                 InfoPageBottomBar(navController)
             }
         }

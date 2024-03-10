@@ -220,7 +220,7 @@ fun PlumbingCalcHelp(
                 )
             )
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(0.9f)) {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(1f)) {
                 items(PlumbingHelpParams) {
                     Text(
                         text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
@@ -228,7 +228,7 @@ fun PlumbingCalcHelp(
                 }
             }
 
-            Box(modifier = Modifier.weight(0.15f)) {
+            Box() {
                 InfoPageBottomBar(navController)
             }
         }

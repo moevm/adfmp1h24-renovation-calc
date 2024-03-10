@@ -230,7 +230,7 @@ fun LaminateCalcHelp(
                 )
             )
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(0.9f)) {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(1f)) {
                 items(LaminateHelpParams) {
                     Text(
                         text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
@@ -238,7 +238,7 @@ fun LaminateCalcHelp(
                 }
             }
 
-            Box(modifier = Modifier.weight(0.15f)) {
+            Box() {
                 InfoPageBottomBar(navController)
             }
         }

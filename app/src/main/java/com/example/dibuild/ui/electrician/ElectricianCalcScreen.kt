@@ -108,11 +108,11 @@ fun ElectricianCalcScreen(
             }
         }
 
-        Box(modifier = Modifier.weight(0.9f)) {
+        Box(modifier = Modifier.weight(1f)) {
             inputCalcCard(paramsBlockList = ElectricianParams)
         }
 
-        Box(modifier = Modifier.weight(0.135f)) {
+        Box() {
             CalculatePageBottomBar(navController, DibuildScreens.ElectricianRes.name)
         }
 
@@ -267,7 +267,7 @@ fun ElectricianCalcHelp(
                 )
             )
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(0.9f)) {
+            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(1f)) {
                 items(ElectricianHelpParams) {
                     Text(
                         text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
@@ -275,7 +275,7 @@ fun ElectricianCalcHelp(
                 }
             }
 
-            Box(modifier = Modifier.weight(0.15f)) {
+            Box() {
                 InfoPageBottomBar(navController)
             }
 
