@@ -1,40 +1,64 @@
 package com.example.dibuild.ui.UITools
 
+import android.view.View
 import androidx.compose.animation.scaleIn
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.ArrowBack
 import androidx.compose.material.icons.sharp.Download
 import androidx.compose.material.icons.sharp.Menu
 import androidx.compose.material.icons.sharp.Share
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.DibuildScreens
+import com.example.dibuild.ui.electrician.ElectricianViewModel
 import com.example.dibuild.ui.theme.DibuildTheme
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun CalculatePageBottomBar(
     navController: NavHostController,
-    resScreen: String
+    resScreen: String,
+    validateFunc: () -> Pair<Boolean, List<String>> = { Pair(true, emptyList()) }
 ) {
+
+    var invalidFields by remember { mutableStateOf(emptyList<String>()) }
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -53,7 +77,14 @@ fun CalculatePageBottomBar(
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { navController.navigate(resScreen) },
+            onClick = {
+                val d = validateFunc()
+                if (d.first) {
+                    navController.navigate(resScreen)
+                } else {
+                    invalidFields = d.second
+                }
+            },
             modifier = Modifier.size(100.dp),
             contentPadding = PaddingValues(0.dp),
         ) {
@@ -79,7 +110,46 @@ fun CalculatePageBottomBar(
             )
         }
     }
+
+    if (invalidFields.isNotEmpty()) {
+        AlertDialog(
+            onDismissRequest = { invalidFields = emptyList<String>() },
+
+            ) {
+            Box(contentAlignment = Alignment.Center) {
+                Card() {
+                    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                        Text(
+                            text = "Вы неправильно заполнили следующие поля",
+                            modifier = Modifier.padding(10.dp),
+                            fontSize = 20.sp,
+                            textAlign = TextAlign.Center
+                        )
+                        LazyColumn(
+                            contentPadding = PaddingValues(18.dp),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            items(invalidFields) { it ->
+                                Card(modifier = Modifier.padding(10.dp),
+                                    colors = CardDefaults.cardColors(
+                                        containerColor = MaterialTheme.colorScheme.onError,
+                                    ),) {
+                                    Text(
+                                        text = it,
+                                        fontSize = 20.sp,
+                                        modifier = Modifier.padding(10.dp),
+                                        textAlign = TextAlign.Center
+                                    )
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
+
 
 @Composable
 fun CalculateResultsPageBottomBar(
@@ -207,10 +277,9 @@ fun SectionsPageBottomBar(
 }
 
 
-
 @Composable
 @Preview
-fun CalculatePageBottomBarPreview(){
+fun CalculatePageBottomBarPreview() {
     DibuildTheme {
         CalculatePageBottomBar(rememberNavController(), DibuildScreens.WallpapersRes.name)
     }
@@ -218,7 +287,7 @@ fun CalculatePageBottomBarPreview(){
 
 @Composable
 @Preview
-fun CalculateResultsPageBottomBarPreview(){
+fun CalculateResultsPageBottomBarPreview() {
     DibuildTheme {
         CalculateResultsPageBottomBar(rememberNavController(), DibuildScreens.WallpapersCalc.name)
     }
@@ -226,7 +295,7 @@ fun CalculateResultsPageBottomBarPreview(){
 
 @Composable
 @Preview
-fun InfoPageBottomBarPreview(){
+fun InfoPageBottomBarPreview() {
     DibuildTheme {
         InfoPageBottomBar(rememberNavController())
     }
