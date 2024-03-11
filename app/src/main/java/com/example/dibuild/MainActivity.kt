@@ -11,13 +11,14 @@ import androidx.navigation.NavHostController
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavDestination
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.ui.about.AboutCalcScreen
 import com.example.dibuild.ui.electrician.ElectricianCalcHelp
 import com.example.dibuild.ui.electrician.ElectricianCalcResult
 import com.example.dibuild.ui.electrician.ElectricianCalcScreen
+import com.example.dibuild.ui.electrician.ElectricianViewModel
 import com.example.dibuild.ui.history.HistoryCalcScreen
 import com.example.dibuild.ui.laminate.LaminateCalcHelp
 import com.example.dibuild.ui.laminate.LaminateCalcResult
@@ -78,6 +79,8 @@ fun DibuildApp(
     navController: NavHostController = rememberNavController()
 ) {
 
+    val electricianViewModel: ElectricianViewModel = viewModel()
+
     NavHost(
         navController = navController,
         startDestination = DibuildScreens.Sections.name,
@@ -131,7 +134,7 @@ fun DibuildApp(
         }
 
         composable(route = DibuildScreens.ElectricianCalc.name){
-            ElectricianCalcScreen(navController)
+            ElectricianCalcScreen(navController, electricianViewModel)
         }
 
         composable(route = DibuildScreens.ElectricianHelp.name){
@@ -139,7 +142,7 @@ fun DibuildApp(
         }
 
         composable(route = DibuildScreens.ElectricianRes.name){
-            ElectricianCalcResult(navController)
+            ElectricianCalcResult(navController, electricianViewModel)
         }
 
 
@@ -160,7 +163,7 @@ fun DibuildApp(
 
 @Preview(showBackground = true)
 @Composable
-fun GreetingPreview() {
+fun DibuildPreview() {
     DibuildTheme {
         DibuildApp()
     }

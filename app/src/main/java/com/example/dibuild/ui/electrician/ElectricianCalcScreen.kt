@@ -1,5 +1,6 @@
 package com.example.dibuild.ui.electrician
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -20,6 +21,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -27,6 +33,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.DibuildScreens
@@ -40,31 +47,76 @@ import com.example.dibuild.ui.UITools.inputCalcCard
 import com.example.dibuild.ui.theme.DibuildTheme
 
 
+@SuppressLint("UnrememberedMutableState")
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun ElectricianCalcScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    electricianViewModel: ElectricianViewModel = viewModel()
 ) {
+    val electricianUiState by electricianViewModel.uiState.collectAsState()
 
-    val ElectricianParams = listOf(
+    var socket_num by remember { mutableStateOf(electricianUiState.socket_num) }
+    var switch_num by remember { mutableStateOf(electricianUiState.switch_num) }
+    var wire_length by remember { mutableStateOf(electricianUiState.wire_length) }
+    var wire_price by remember { mutableStateOf(electricianUiState.wire_price) }
+    var duct_length by remember { mutableStateOf(electricianUiState.duct_length) }
+    var duct_price by remember { mutableStateOf(electricianUiState.duct_price) }
+    var socket_price by remember { mutableStateOf(electricianUiState.socket_price) }
+    var switch_price by remember { mutableStateOf(electricianUiState.switch_price) }
+
+    var ElectricianParams = listOf(
         ParamsBlock(
             "Параметры помещения", listOf(
-                Param("Количество\nрозеток", "10", "шт"),
-                Param("Количество\nвыключателей", "10", "шт"),
+                Param("Количество\nрозеток", socket_num, "шт") {
+                    socket_num = it
+                    electricianViewModel.updateSocketNum(it)
+                },
+                Param("Количество\nвыключателей", switch_num, "шт") {
+                    switch_num = it
+                    electricianViewModel.updateSwitchNum(it)
+                },
             )
         ),
 
         ParamsBlock(
             "Параметры электрики", listOf(
-                Param("Длина провода", "2.15", "м"),
-                Param("Цена провода", "600", "₽/м"),
-                Param("Длина\nпластикового\nкороба", "2", "м"),
-                Param("Цена\nпластикового\nкороба", "678", "₽/м"),
-                Param("Цена розетки", "500", "₽"),
-                Param("Цена выключателя", "500", "₽"),
+                Param("Длина провода", wire_length, "м") {
+                    wire_length = it
+                    electricianViewModel.updateWireLength(it)
+                },
+                Param("Цена провода", wire_price, "₽/м") {
+                    wire_price = it
+                    electricianViewModel.updateWirePrice(it)
+                },
+                Param(
+                    "Длина\nпластикового\nкороба",
+                    duct_length,
+                    "м",
+                ) {
+                    duct_length = it
+                    electricianViewModel.updateDuctLength(it)
+                },
+                Param(
+                    "Цена\nпластикового\nкороба",
+                    duct_price,
+                    "₽/м",
+                ) {
+                    duct_price = it
+                    electricianViewModel.updateDuctPrice(it)
+                },
+                Param("Цена розетки", socket_price, "₽") {
+                    socket_price = it
+                    electricianViewModel.updateSocketPrice(it)
+                },
+                Param("Цена выключателя", switch_price, "₽") {
+                    switch_price = it
+                    electricianViewModel.updateSwitchPrice(it)
+                },
             )
         ),
     )
+
 
 
     Column(
@@ -113,21 +165,25 @@ fun ElectricianCalcScreen(
         }
 
         Box() {
-            CalculatePageBottomBar(navController, DibuildScreens.ElectricianRes.name)
+            CalculatePageBottomBar(navController, DibuildScreens.ElectricianRes.name,
+                { electricianViewModel.validate() })
         }
 
     }
 }
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun ElectricianCalcResult(
-    navController: NavHostController
-){
-
+    navController: NavHostController,
+    electricianViewModel: ElectricianViewModel = viewModel()
+) {
+    val electricianUiState by electricianViewModel.uiState.collectAsState()
+    electricianViewModel.countTotal()
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
-    ){
+    ) {
         Card() {
             Column(
                 horizontalAlignment = Alignment.CenterHorizontally,
@@ -148,7 +204,7 @@ fun ElectricianCalcResult(
                     )
 
                     Text(
-                        text = "5000 ₽",
+                        text = "${"%.2f".format(electricianViewModel.uiState.value.wire_total)} ₽",
                         fontSize = 20.sp,
                     )
                 }
@@ -161,7 +217,7 @@ fun ElectricianCalcResult(
                         fontSize = 20.sp,
                     )
                     Text(
-                        text = "2456 ₽",
+                        text = "${"%.2f".format(electricianViewModel.uiState.value.duct_total)} ₽",
                         fontSize = 20.sp,
                     )
                 }
@@ -174,7 +230,7 @@ fun ElectricianCalcResult(
                         fontSize = 20.sp,
                     )
                     Text(
-                        text = "2100 ₽",
+                        text = "${"%.2f".format(electricianViewModel.uiState.value.switch_total)} ₽",
                         fontSize = 20.sp,
                     )
                 }
@@ -187,7 +243,7 @@ fun ElectricianCalcResult(
                         fontSize = 20.sp,
                     )
                     Text(
-                        text = "3200 ₽",
+                        text = "${"%.2f".format(electricianViewModel.uiState.value.socket_total)} ₽",
                         fontSize = 20.sp,
                     )
                 }
@@ -200,16 +256,17 @@ fun ElectricianCalcResult(
                         fontSize = 20.sp,
                     )
                     Text(
-                        text = "12756 ₽",
+                        text = "${"%.2f".format(electricianViewModel.uiState.value.total)} ₽",
                         fontSize = 20.sp,
                     )
                 }
             }
         }
-        Column(verticalArrangement = Arrangement.Bottom,
+        Column(
+            verticalArrangement = Arrangement.Bottom,
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize()
-        ){
+        ) {
             CalculateResultsPageBottomBar(navController, DibuildScreens.ElectricianCalc.name)
         }
     }
@@ -218,7 +275,7 @@ fun ElectricianCalcResult(
 @Composable
 fun ElectricianCalcHelp(
     navController: NavHostController
-){
+) {
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxWidth()
@@ -267,7 +324,10 @@ fun ElectricianCalcHelp(
                 )
             )
 
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp), modifier = Modifier.weight(1f)) {
+            LazyColumn(
+                verticalArrangement = Arrangement.spacedBy(10.dp),
+                modifier = Modifier.weight(1f)
+            ) {
                 items(ElectricianHelpParams) {
                     Text(
                         text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
