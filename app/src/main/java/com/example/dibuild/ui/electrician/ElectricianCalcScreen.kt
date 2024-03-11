@@ -168,6 +168,7 @@ fun ElectricianCalcScreen(
             CalculatePageBottomBar(navController, DibuildScreens.ElectricianRes.name,
                 { electricianViewModel.validate() }, {
                     electricianViewModel.clearValues()
+                    navController.popBackStack()
                     navController.navigate(DibuildScreens.ElectricianCalc.name)
                 })
         }
