@@ -54,7 +54,8 @@ import com.example.dibuild.ui.theme.DibuildTheme
 fun CalculatePageBottomBar(
     navController: NavHostController,
     resScreen: String,
-    validateFunc: () -> Pair<Boolean, List<String>> = { Pair(true, emptyList()) }
+    validateFunc: () -> Pair<Boolean, List<String>> = { Pair(true, emptyList()) },
+    clearFunc: () -> Unit = {}
 ) {
 
     var invalidFields by remember { mutableStateOf(emptyList<String>()) }
@@ -99,7 +100,7 @@ fun CalculatePageBottomBar(
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = clearFunc,
             modifier = Modifier.size(100.dp),
             contentPadding = PaddingValues(0.dp),
         ) {

@@ -65,7 +65,7 @@ fun ElectricianCalcScreen(
     var socket_price by remember { mutableStateOf(electricianUiState.socket_price) }
     var switch_price by remember { mutableStateOf(electricianUiState.switch_price) }
 
-    var ElectricianParams = listOf(
+    val ElectricianParams = listOf(
         ParamsBlock(
             "Параметры помещения", listOf(
                 Param("Количество\nрозеток", socket_num, "шт") {
@@ -166,9 +166,11 @@ fun ElectricianCalcScreen(
 
         Box() {
             CalculatePageBottomBar(navController, DibuildScreens.ElectricianRes.name,
-                { electricianViewModel.validate() })
+                { electricianViewModel.validate() }, {
+                    electricianViewModel.clearValues()
+                    navController.navigate(DibuildScreens.ElectricianCalc.name)
+                })
         }
-
     }
 }
 
@@ -179,6 +181,7 @@ fun ElectricianCalcResult(
     electricianViewModel: ElectricianViewModel = viewModel()
 ) {
     val electricianUiState by electricianViewModel.uiState.collectAsState()
+
     electricianViewModel.countTotal()
     Box(
         contentAlignment = Alignment.Center,

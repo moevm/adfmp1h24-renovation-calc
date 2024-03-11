@@ -37,6 +37,19 @@ class ElectricianViewModel : ViewModel() {
         _uiState.value = uiState.value.copy(total = total_price)
     }
 
+    fun clearValues() {
+        _uiState.value = uiState.value.copy(
+            socket_num = "0",
+            switch_num = "0",
+            wire_length = "0",
+            wire_price = "0",
+            duct_length = "0",
+            duct_price = "0",
+            socket_price = "0",
+            switch_price = "0",
+        )
+    }
+
     fun updateSocketNum(newNum: String) {
         _uiState.value = uiState.value.copy(socket_num = newNum)
     }
