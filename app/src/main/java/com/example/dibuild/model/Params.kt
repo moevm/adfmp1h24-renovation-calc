@@ -7,9 +7,14 @@ data class ParamsBlock(
 )
 
 data class Param(
+    // Название параметра
     val name: String,
+    // Значение параметра
     val value: String,
+    // Единицы измерения параметра
     val unit: String,
+    // Функция для отображения ввода
+    val onValueChanged:(String) -> Unit = {},
 )
 
 data class Help(
