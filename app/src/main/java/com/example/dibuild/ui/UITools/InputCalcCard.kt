@@ -15,6 +15,10 @@ import androidx.compose.material3.Card
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
@@ -26,7 +30,7 @@ import com.example.dibuild.model.ParamsBlock
 
 
 @Composable
-fun inputCalcCard(paramsBlockList:List<ParamsBlock>){
+fun inputCalcCard(paramsBlockList: List<ParamsBlock>) {
     LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
         items(paramsBlockList) {
             Card() {
@@ -51,7 +55,7 @@ fun inputCalcCard(paramsBlockList:List<ParamsBlock>){
                             Spacer(modifier = Modifier.padding(10.dp))
                             OutlinedTextField(
                                 value = param.value,
-                                onValueChange = {/*TODO*/ },
+                                onValueChange = param.onValueChanged,
                                 keyboardOptions = KeyboardOptions.Default.copy(
                                     keyboardType = KeyboardType.Number,
                                     imeAction = ImeAction.Next
