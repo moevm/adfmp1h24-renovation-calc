@@ -1,6 +1,10 @@
 package com.example.dibuild.ui.UITools
 
+import android.content.Context
+import android.content.Intent
 import android.view.View
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.animation.scaleIn
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
@@ -37,16 +41,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.DibuildScreens
 import com.example.dibuild.ui.electrician.ElectricianViewModel
+import com.example.dibuild.ui.history.HistoryViewModel
 import com.example.dibuild.ui.theme.DibuildTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -156,7 +163,12 @@ fun CalculatePageBottomBar(
 fun CalculateResultsPageBottomBar(
     navController: NavHostController,
     calcScreen: String,
+    historyViewModel: HistoryViewModel = HistoryViewModel(),
 ) {
+    val context = LocalContext.current
+    val shareLauncher =
+        rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
+
     Row(
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -175,7 +187,16 @@ fun CalculateResultsPageBottomBar(
         }
         Spacer(modifier = Modifier.padding(10.dp))
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                val sendIntent: Intent = Intent().apply {
+                    action = Intent.ACTION_SEND
+                    putExtra(Intent.EXTRA_TEXT, historyViewModel.uiState.value.history.joinToString(separator = "\n"))
+                    putExtra(Intent.EXTRA_SUBJECT, "Результат вычисления Dibuild")
+                    type = "text/plain"
+                }
+                val shareIntent = Intent.createChooser(sendIntent, null)
+                shareLauncher.launch(shareIntent)
+            },
             modifier = Modifier.size(100.dp),
         ) {
             Icon(
