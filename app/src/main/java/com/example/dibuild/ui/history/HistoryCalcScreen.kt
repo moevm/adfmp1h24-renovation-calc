@@ -71,7 +71,7 @@ fun HistoryCalcScreen(
             }
 
             Box() {
-                CalculateResultsPageBottomBar(navController, "")
+                CalculateResultsPageBottomBar(navController, "", historyViewModel)
             }
         }
     }

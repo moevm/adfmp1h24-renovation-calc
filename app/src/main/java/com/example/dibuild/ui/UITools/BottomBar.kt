@@ -171,7 +171,6 @@ fun CalculateResultsPageBottomBar(
     calcScreen: String,
     historyViewModel: HistoryViewModel = HistoryViewModel(),
 ) {
-    val context = LocalContext.current
     val shareLauncher =
         rememberLauncherForActivityResult(ActivityResultContracts.StartActivityForResult()) { }
 
@@ -196,7 +195,10 @@ fun CalculateResultsPageBottomBar(
             onClick = {
                 val sendIntent: Intent = Intent().apply {
                     action = Intent.ACTION_SEND
-                    putExtra(Intent.EXTRA_TEXT, historyViewModel.uiState.value.history.joinToString(separator = "\n"))
+                    putExtra(
+                        Intent.EXTRA_TEXT,
+                        historyViewModel.uiState.value.history.joinToString(separator = "\n")
+                    )
                     putExtra(Intent.EXTRA_SUBJECT, "Результат вычисления Dibuild")
                     type = "text/plain"
                 }
