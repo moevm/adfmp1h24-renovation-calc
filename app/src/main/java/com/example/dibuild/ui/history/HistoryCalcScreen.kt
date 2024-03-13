@@ -28,7 +28,8 @@ import com.example.dibuild.ui.UITools.InfoPageBottomBar
 
 @Composable
 fun HistoryCalcScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    historyViewModel: HistoryViewModel
 ) {
 
     Box(
@@ -55,37 +56,21 @@ fun HistoryCalcScreen(
                 )
 
             }
-            val HistoryParams = listOf(
-                Help(
-                    "Сантехника"
-                ),
 
-                Help(
-                    "Стоимость труб =\n10 м * 150 ₽"
-                ),
-
-                Help(
-                    "Стоимость вентилей =\n10 шт * 150 ₽"
-                ),
-
-                Help(
-                    "Итого:\n1500 ₽ + 1500 ₽ + 150 ₽ + 150 ₽ = 3300 ₽"
-                )
-            )
-
-            LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
-                items(HistoryParams) {
-                    Text(
-                        text = it.info, modifier = Modifier.padding(10.dp), fontSize = 25.sp
-                    )
+            Box(modifier = Modifier.weight(1f)) {
+                LazyColumn(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    items(historyViewModel.uiState.value.history) {
+                        Text(
+                            text = it,
+                            modifier = Modifier.padding(10.dp),
+                            fontSize = 25.sp,
+                            textAlign = TextAlign.Center
+                        )
+                    }
                 }
             }
 
-            Column(
-                verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
-            ) {
+            Box() {
                 CalculateResultsPageBottomBar(navController, "")
             }
         }
@@ -95,8 +80,8 @@ fun HistoryCalcScreen(
 
 @Preview
 @Composable
-fun HistoryPreview(){
+fun HistoryPreview() {
     DibuildTheme {
-        HistoryCalcScreen(rememberNavController())
+        HistoryCalcScreen(rememberNavController(), HistoryViewModel())
     }
 }

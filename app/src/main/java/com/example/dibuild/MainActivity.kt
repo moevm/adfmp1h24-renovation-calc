@@ -20,6 +20,7 @@ import com.example.dibuild.ui.electrician.ElectricianCalcResult
 import com.example.dibuild.ui.electrician.ElectricianCalcScreen
 import com.example.dibuild.ui.electrician.ElectricianViewModel
 import com.example.dibuild.ui.history.HistoryCalcScreen
+import com.example.dibuild.ui.history.HistoryViewModel
 import com.example.dibuild.ui.laminate.LaminateCalcHelp
 import com.example.dibuild.ui.laminate.LaminateCalcResult
 import com.example.dibuild.ui.laminate.LaminateCalcScreen
@@ -79,7 +80,9 @@ fun DibuildApp(
     navController: NavHostController = rememberNavController()
 ) {
 
-    val electricianViewModel: ElectricianViewModel = viewModel()
+    val historyViewModel = HistoryViewModel()
+
+    val electricianViewModel = ElectricianViewModel()
 
     NavHost(
         navController = navController,
@@ -93,8 +96,8 @@ fun DibuildApp(
             AboutCalcScreen(navController)
         }
 
-        composable(route = DibuildScreens.History.name){
-            HistoryCalcScreen(navController)
+        composable(route = DibuildScreens.History.name) {
+            HistoryCalcScreen(navController, historyViewModel)
         }
 
         composable(route = DibuildScreens.LaminateCalc.name){
