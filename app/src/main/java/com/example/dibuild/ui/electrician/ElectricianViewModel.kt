@@ -103,4 +103,45 @@ class ElectricianViewModel : ViewModel() {
         }
     }
 
+    fun getElectricianCalcHistory(): List<String> {
+        return listOf(
+            "Электрика",
+            "Количество розеток = %s шт".format(_uiState.value.socket_num),
+            "Количество выключателей = %s шт".format(_uiState.value.switch_num),
+            "Длина провода = %s м".format(_uiState.value.wire_length),
+            "Цена провода = %s ₽/м".format(_uiState.value.wire_price),
+            "Длина пластикового короба = %s м".format(_uiState.value.duct_length),
+            "Цена пластикового короба = %s ₽/м".format(_uiState.value.duct_price),
+            "Цена розетки = %s ₽".format(_uiState.value.socket_price),
+            "Цена выключателя = %s ₽".format(_uiState.value.switch_price),
+            "Стоимость провода = %s м * %s ₽ = %.2f₽".format(
+                _uiState.value.wire_length,
+                _uiState.value.wire_price,
+                _uiState.value.wire_total
+            ),
+            "Стоимость пластикового короба = %s м * %s ₽ = %.2f ₽".format(
+                _uiState.value.duct_length,
+                _uiState.value.duct_price,
+                _uiState.value.duct_total
+            ),
+            "Стоимость выключателей = %s шт * %s ₽ = %.2f ₽".format(
+                _uiState.value.switch_num,
+                _uiState.value.switch_price,
+                _uiState.value.switch_total
+            ),
+            "Стоимость розеток = %s шт * %s ₽ = %.2f ₽".format(
+                _uiState.value.socket_num,
+                _uiState.value.socket_price,
+                _uiState.value.socket_total
+            ),
+            "Итоговая стоимость = %.2f ₽ + %.2f ₽ + %.2f ₽ + %.2f ₽ = %.2f ₽".format(
+                _uiState.value.wire_total,
+                _uiState.value.duct_total,
+                _uiState.value.switch_total,
+                _uiState.value.socket_total,
+                _uiState.value.total
+            ),
+        )
+    }
+
 }

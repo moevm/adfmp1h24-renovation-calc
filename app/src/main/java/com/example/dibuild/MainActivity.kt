@@ -88,11 +88,11 @@ fun DibuildApp(
         navController = navController,
         startDestination = DibuildScreens.Sections.name,
     ) {
-        composable(route = DibuildScreens.Sections.name){
+        composable(route = DibuildScreens.Sections.name) {
             SectionsCalcScreen(navController)
         }
 
-        composable(route = DibuildScreens.About.name){
+        composable(route = DibuildScreens.About.name) {
             AboutCalcScreen(navController)
         }
 
@@ -100,64 +100,64 @@ fun DibuildApp(
             HistoryCalcScreen(navController, historyViewModel)
         }
 
-        composable(route = DibuildScreens.LaminateCalc.name){
+        composable(route = DibuildScreens.LaminateCalc.name) {
             LaminateCalcScreen(navController)
         }
 
-        composable(route = DibuildScreens.LaminateHelp.name){
+        composable(route = DibuildScreens.LaminateHelp.name) {
             LaminateCalcHelp(navController)
         }
 
-        composable(route = DibuildScreens.LaminateRes.name){
+        composable(route = DibuildScreens.LaminateRes.name) {
             LaminateCalcResult(navController)
         }
 
-        composable(route = DibuildScreens.WallpapersCalc.name){
+        composable(route = DibuildScreens.WallpapersCalc.name) {
             WallpapersCalcScreen(navController)
         }
 
-        composable(route = DibuildScreens.WallpapersHelp.name){
+        composable(route = DibuildScreens.WallpapersHelp.name) {
             WallpapersCalcHelp(navController)
         }
 
-        composable(route = DibuildScreens.WallpapersRes.name){
+        composable(route = DibuildScreens.WallpapersRes.name) {
             WallpapersCalcResult(navController)
         }
 
-        composable(route = DibuildScreens.TileCalc.name){
+        composable(route = DibuildScreens.TileCalc.name) {
             TileCalcScreen(navController)
         }
 
-        composable(route = DibuildScreens.TileHelp.name){
+        composable(route = DibuildScreens.TileHelp.name) {
             TileCalcHelp(navController)
         }
 
-        composable(route = DibuildScreens.TileRes.name){
+        composable(route = DibuildScreens.TileRes.name) {
             TileCalcResult(navController)
         }
 
-        composable(route = DibuildScreens.ElectricianCalc.name){
-            ElectricianCalcScreen(navController, electricianViewModel)
+        composable(route = DibuildScreens.ElectricianCalc.name) {
+            ElectricianCalcScreen(navController, electricianViewModel, historyViewModel)
         }
 
-        composable(route = DibuildScreens.ElectricianHelp.name){
+        composable(route = DibuildScreens.ElectricianHelp.name) {
             ElectricianCalcHelp(navController)
         }
 
-        composable(route = DibuildScreens.ElectricianRes.name){
-            ElectricianCalcResult(navController, electricianViewModel)
+        composable(route = DibuildScreens.ElectricianRes.name) {
+            ElectricianCalcResult(navController, electricianViewModel, historyViewModel)
         }
 
 
-        composable(route = DibuildScreens.PlumbingCalc.name){
+        composable(route = DibuildScreens.PlumbingCalc.name) {
             PlumbingCalcScreen(navController)
         }
 
-        composable(route = DibuildScreens.PlumbingHelp.name){
+        composable(route = DibuildScreens.PlumbingHelp.name) {
             PlumbingCalcHelp(navController)
         }
 
-        composable(route = DibuildScreens.PlumbingRes.name){
+        composable(route = DibuildScreens.PlumbingRes.name) {
             PlumbingCalcResult(navController)
         }
     }

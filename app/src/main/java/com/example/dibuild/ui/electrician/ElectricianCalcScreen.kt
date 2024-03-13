@@ -44,6 +44,7 @@ import com.example.dibuild.ui.UITools.CalculatePageBottomBar
 import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 import com.example.dibuild.ui.UITools.InfoPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
+import com.example.dibuild.ui.history.HistoryViewModel
 import com.example.dibuild.ui.theme.DibuildTheme
 
 
@@ -52,7 +53,8 @@ import com.example.dibuild.ui.theme.DibuildTheme
 @Composable
 fun ElectricianCalcScreen(
     navController: NavHostController,
-    electricianViewModel: ElectricianViewModel = viewModel()
+    electricianViewModel: ElectricianViewModel = ElectricianViewModel(),
+    historyViewModel: HistoryViewModel = HistoryViewModel()
 ) {
     val electricianUiState by electricianViewModel.uiState.collectAsState()
 
@@ -165,12 +167,16 @@ fun ElectricianCalcScreen(
         }
 
         Box() {
-            CalculatePageBottomBar(navController, DibuildScreens.ElectricianRes.name,
-                { electricianViewModel.validate() }, {
+            CalculatePageBottomBar(navController,
+                DibuildScreens.ElectricianRes.name,
+                { electricianViewModel.validate() },
+                {
                     electricianViewModel.clearValues()
                     navController.popBackStack()
                     navController.navigate(DibuildScreens.ElectricianCalc.name)
-                })
+                },
+                { historyViewModel.updateHistory(electricianViewModel.getElectricianCalcHistory()) },
+                { electricianViewModel.countTotal() })
         }
     }
 }
@@ -179,11 +185,9 @@ fun ElectricianCalcScreen(
 @Composable
 fun ElectricianCalcResult(
     navController: NavHostController,
-    electricianViewModel: ElectricianViewModel = viewModel()
+    electricianViewModel: ElectricianViewModel = ElectricianViewModel(),
+    historyViewModel: HistoryViewModel = HistoryViewModel(),
 ) {
-    val electricianUiState by electricianViewModel.uiState.collectAsState()
-
-    electricianViewModel.countTotal()
     Box(
         contentAlignment = Alignment.Center,
         modifier = Modifier.fillMaxSize()
@@ -271,7 +275,11 @@ fun ElectricianCalcResult(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize()
         ) {
-            CalculateResultsPageBottomBar(navController, DibuildScreens.ElectricianCalc.name)
+            CalculateResultsPageBottomBar(
+                navController,
+                DibuildScreens.ElectricianCalc.name,
+                historyViewModel
+            )
         }
     }
 }
