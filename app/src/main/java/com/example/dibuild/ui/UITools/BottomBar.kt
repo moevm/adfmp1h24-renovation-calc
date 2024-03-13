@@ -62,7 +62,9 @@ fun CalculatePageBottomBar(
     navController: NavHostController,
     resScreen: String,
     validateFunc: () -> Pair<Boolean, List<String>> = { Pair(true, emptyList()) },
-    clearFunc: () -> Unit = {}
+    clearFunc: () -> Unit = {},
+    updateHistoryFunc: () -> Unit = {},
+    calculateFunc: () -> Unit = {}
 ) {
 
     var invalidFields by remember { mutableStateOf(emptyList<String>()) }
@@ -88,6 +90,8 @@ fun CalculatePageBottomBar(
             onClick = {
                 val d = validateFunc()
                 if (d.first) {
+                    calculateFunc()
+                    updateHistoryFunc()
                     navController.navigate(resScreen)
                 } else {
                     invalidFields = d.second
@@ -138,10 +142,12 @@ fun CalculatePageBottomBar(
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             items(invalidFields) { it ->
-                                Card(modifier = Modifier.padding(10.dp),
+                                Card(
+                                    modifier = Modifier.padding(10.dp),
                                     colors = CardDefaults.cardColors(
                                         containerColor = MaterialTheme.colorScheme.onError,
-                                    ),) {
+                                    ),
+                                ) {
                                     Text(
                                         text = it,
                                         fontSize = 20.sp,
@@ -325,7 +331,7 @@ fun InfoPageBottomBarPreview() {
 
 @Composable
 @Preview
-fun SectionsPageBottomBarPreview(){
+fun SectionsPageBottomBarPreview() {
     DibuildTheme {
         SectionsPageBottomBar(rememberNavController())
     }
