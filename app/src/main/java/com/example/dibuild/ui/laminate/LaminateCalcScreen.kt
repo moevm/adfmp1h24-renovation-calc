@@ -1,5 +1,6 @@
 package com.example.dibuild.ui.laminate
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -19,6 +20,11 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -36,27 +42,59 @@ import com.example.dibuild.ui.UITools.CalculatePageBottomBar
 import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 import com.example.dibuild.ui.UITools.InfoPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
+import com.example.dibuild.ui.history.HistoryViewModel
 import com.example.dibuild.ui.theme.DibuildTheme
 
 
+@SuppressLint("UnrememberedMutableState")
 @Composable
 fun LaminateCalcScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    laminateViewModel: LaminateViewModel = LaminateViewModel(),
+    historyViewModel: HistoryViewModel = HistoryViewModel()
 ) {
+
+    val laminateUiState by laminateViewModel.uiState.collectAsState()
+
+    var room_length by remember { mutableStateOf(laminateUiState.room_length) }
+    var room_width by remember { mutableStateOf(laminateUiState.room_width) }
+    var board_length by remember { mutableStateOf(laminateUiState.board_length) }
+    var board_width by remember { mutableStateOf(laminateUiState.board_width) }
+    var board_num by remember { mutableStateOf(laminateUiState.board_num) }
+    var board_price by remember { mutableStateOf(laminateUiState.board_price) }
+
     val LaminateParams = listOf(
         ParamsBlock(
             "Параметры помещения", listOf(
-                Param("Длина комнаты", "10", "м"),
-                Param("Ширина комнаты", "10", "м"),
+                Param("Длина комнаты", room_length, "м"){
+                    room_length = it
+                    laminateViewModel.updateRoomLength(it)
+                },
+                Param("Ширина комнаты", room_width, "м"){
+                    room_width = it
+                    laminateViewModel.updateRoomWidth(it)
+                },
             )
         ),
 
         ParamsBlock(
             "Параметры ламината", listOf(
-                Param("Длина доски", "2", "м"),
-                Param("Ширина доски", "1", "м"),
-                Param("Количество в\nупаковке", "20", "шт"),
-                Param("Цена", "3000", "₽/м2"),
+                Param("Длина доски", board_length, "м"){
+                    board_length = it
+                    laminateViewModel.updateBoardLength(it)
+                },
+                Param("Ширина доски", board_width, "м"){
+                    board_width = it
+                    laminateViewModel.updateBoardWidth(it)
+                },
+                Param("Количество в\nупаковке", board_num, "шт"){
+                    board_num = it
+                    laminateViewModel.updateBoardNum(it)
+                },
+                Param("Цена", board_price, "₽/м2"){
+                    board_price = it
+                    laminateViewModel.updateBoardPrice(it)
+                },
             )
         ),
     )
@@ -108,14 +146,26 @@ fun LaminateCalcScreen(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize()
         ){
-            CalculatePageBottomBar(navController, DibuildScreens.LaminateRes.name)
+            CalculatePageBottomBar(navController,
+                DibuildScreens.LaminateRes.name,
+                { laminateViewModel.validate() },
+                {
+                    laminateViewModel.clearValues()
+                    navController.popBackStack()
+                    navController.navigate(DibuildScreens.LaminateCalc.name)
+                },
+                { historyViewModel.updateHistory(laminateViewModel.getLaminateCalcHistory()) },
+                { laminateViewModel.countTotal() })
         }
     }
 }
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun LaminateCalcResult(
-    navController: NavHostController
+    navController: NavHostController,
+    laminateViewModel: LaminateViewModel = LaminateViewModel(),
+    historyViewModel: HistoryViewModel = HistoryViewModel(),
 ){
 
     Box(
@@ -142,7 +192,7 @@ fun LaminateCalcResult(
                         )
 
                     Text(
-                        text = "4 упаковки",
+                        text = "${"%s".format(laminateViewModel.uiState.value.laminate_num)} упаковки",
                         fontSize = 20.sp,)
                 }
 
@@ -152,7 +202,7 @@ fun LaminateCalcResult(
                     Text(text = "Итоговая стоимость",
                         fontSize = 30.sp,
                         )
-                    Text(text = "2456 р.",
+                    Text(text = "${"%.2f".format(laminateViewModel.uiState.value.total)} ₽",
                         fontSize = 20.sp,
                         )
                 }
@@ -164,7 +214,7 @@ fun LaminateCalcResult(
                         fontSize = 20.sp,
                         )
                     Text(
-                        text = "1 упаковка",
+                        text = "${"%s".format(laminateViewModel.uiState.value.excess)} упаковка",
                         fontSize = 20.sp,
                         )
                 }
@@ -174,7 +224,9 @@ fun LaminateCalcResult(
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier.fillMaxSize()
         ){
-            CalculateResultsPageBottomBar(navController, DibuildScreens.LaminateCalc.name)
+            CalculateResultsPageBottomBar(navController,
+                DibuildScreens.LaminateCalc.name,
+                historyViewModel)
         }
     }
 }
@@ -223,10 +275,6 @@ fun LaminateCalcHelp(
 
                 Help(
                     "Излишек = Количество упаковок - Количество упаковок без округления вверх"
-                ),
-
-                Help(
-                    "Излишек стоимости = Излишек * площадь одной упаковки * цена за м^2"
                 )
             )
 
