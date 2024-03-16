@@ -107,7 +107,7 @@ fun DibuildApp(
         }
 
         composable(route = DibuildScreens.LaminateCalc.name) {
-            LaminateCalcScreen(navController, laminateViewModel)
+            LaminateCalcScreen(navController, laminateViewModel, historyViewModel)
         }
 
         composable(route = DibuildScreens.LaminateHelp.name) {
@@ -115,7 +115,7 @@ fun DibuildApp(
         }
 
         composable(route = DibuildScreens.LaminateRes.name) {
-            LaminateCalcResult(navController, laminateViewModel)
+            LaminateCalcResult(navController, laminateViewModel, historyViewModel)
         }
 
         composable(route = DibuildScreens.WallpapersCalc.name) {
@@ -156,7 +156,7 @@ fun DibuildApp(
 
 
         composable(route = DibuildScreens.PlumbingCalc.name) {
-            PlumbingCalcScreen(navController, plumbingViewModel)
+            PlumbingCalcScreen(navController, plumbingViewModel, historyViewModel)
         }
 
         composable(route = DibuildScreens.PlumbingHelp.name) {
@@ -164,7 +164,7 @@ fun DibuildApp(
         }
 
         composable(route = DibuildScreens.PlumbingRes.name) {
-            PlumbingCalcResult(navController, plumbingViewModel)
+            PlumbingCalcResult(navController, plumbingViewModel, historyViewModel)
         }
     }
 }
