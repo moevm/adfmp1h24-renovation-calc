@@ -192,7 +192,7 @@ fun LaminateCalcResult(
                         )
 
                     Text(
-                        text = "${"%s".format(laminateViewModel.uiState.value.laminate_num)} упаковки",
+                        text = "${"%s".format(laminateViewModel.uiState.value.laminate_num)} упаковок",
                         fontSize = 20.sp,)
                 }
 
@@ -214,7 +214,7 @@ fun LaminateCalcResult(
                         fontSize = 20.sp,
                         )
                     Text(
-                        text = "${"%s".format(laminateViewModel.uiState.value.excess)} упаковка",
+                        text = "${"%.2f".format(laminateViewModel.uiState.value.excess)} упаковок",
                         fontSize = 20.sp,
                         )
                 }

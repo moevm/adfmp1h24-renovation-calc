@@ -35,7 +35,7 @@ class LaminateViewModel : ViewModel() {
 
         // Итоговая стоимость
         val total_price =
-            _uiState.value.laminate_num * _uiState.value.laminate_square + _uiState.value.board_price.toDouble()
+            _uiState.value.laminate_num * _uiState.value.laminate_square * _uiState.value.board_price.toDouble()
         _uiState.value = uiState.value.copy(total = total_price)
 
         // Излишек
@@ -107,13 +107,18 @@ class LaminateViewModel : ViewModel() {
             "Ширина доски = %s м".format(_uiState.value.board_width),
             "Количество в упаковке = %s шт".format(_uiState.value.board_num),
             "Цена = %s ₽/м".format(_uiState.value.board_price),
+            "Площадь комнаты = %s м * %s м = %.2f м^2".format(
+                _uiState.value.room_length,
+                _uiState.value.room_width,
+                _uiState.value.room_square
+            ),
             "Площадь одной упаковки = %s м * %s м * %s шт = %.2f м^2".format(
                 _uiState.value.board_length,
                 _uiState.value.board_width,
                 _uiState.value.board_num,
                 _uiState.value.laminate_square
             ),
-            "Количество упаковок = %s м^2 / %.2f м^2 = %s шт".format(
+            "Количество упаковок (округлено) = %s м^2 / %.2f м^2 = %s шт".format(
                 _uiState.value.room_square,
                 _uiState.value.laminate_square,
                 _uiState.value.laminate_num
