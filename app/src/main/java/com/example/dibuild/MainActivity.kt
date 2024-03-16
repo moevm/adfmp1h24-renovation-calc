@@ -27,6 +27,7 @@ import com.example.dibuild.ui.laminate.LaminateCalcScreen
 import com.example.dibuild.ui.plumbing.PlumbingCalcHelp
 import com.example.dibuild.ui.plumbing.PlumbingCalcResult
 import com.example.dibuild.ui.plumbing.PlumbingCalcScreen
+import com.example.dibuild.ui.plumbing.PlumbingViewModel
 import com.example.dibuild.ui.sections.SectionsCalcScreen
 import com.example.dibuild.ui.theme.DibuildTheme
 import com.example.dibuild.ui.tile.TileCalcHelp
@@ -83,6 +84,8 @@ fun DibuildApp(
     val historyViewModel = HistoryViewModel()
 
     val electricianViewModel = ElectricianViewModel()
+
+    val plumbingViewModel = PlumbingViewModel()
 
     NavHost(
         navController = navController,
@@ -150,7 +153,7 @@ fun DibuildApp(
 
 
         composable(route = DibuildScreens.PlumbingCalc.name) {
-            PlumbingCalcScreen(navController)
+            PlumbingCalcScreen(navController, plumbingViewModel)
         }
 
         composable(route = DibuildScreens.PlumbingHelp.name) {
@@ -158,7 +161,7 @@ fun DibuildApp(
         }
 
         composable(route = DibuildScreens.PlumbingRes.name) {
-            PlumbingCalcResult(navController)
+            PlumbingCalcResult(navController, plumbingViewModel)
         }
     }
 }
