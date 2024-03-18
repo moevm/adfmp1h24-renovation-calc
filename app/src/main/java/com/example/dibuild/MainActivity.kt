@@ -34,6 +34,7 @@ import com.example.dibuild.ui.theme.DibuildTheme
 import com.example.dibuild.ui.tile.TileCalcHelp
 import com.example.dibuild.ui.tile.TileCalcResult
 import com.example.dibuild.ui.tile.TileCalcScreen
+import com.example.dibuild.ui.tile.TileViewModel
 import com.example.dibuild.ui.wallpapers.WallpapersCalcHelp
 import com.example.dibuild.ui.wallpapers.WallpapersCalcResult
 import com.example.dibuild.ui.wallpapers.WallpapersCalcScreen
@@ -90,6 +91,8 @@ fun DibuildApp(
 
     val laminateViewModel = LaminateViewModel()
 
+    val tileViewModel = TileViewModel()
+
     NavHost(
         navController = navController,
         startDestination = DibuildScreens.Sections.name,
@@ -131,7 +134,7 @@ fun DibuildApp(
         }
 
         composable(route = DibuildScreens.TileCalc.name) {
-            TileCalcScreen(navController)
+            TileCalcScreen(navController, tileViewModel, historyViewModel)
         }
 
         composable(route = DibuildScreens.TileHelp.name) {
@@ -139,7 +142,7 @@ fun DibuildApp(
         }
 
         composable(route = DibuildScreens.TileRes.name) {
-            TileCalcResult(navController)
+            TileCalcResult(navController, tileViewModel, historyViewModel)
         }
 
         composable(route = DibuildScreens.ElectricianCalc.name) {

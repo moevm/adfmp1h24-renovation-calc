@@ -1,10 +1,10 @@
 package com.example.dibuild.ui.tile
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -14,12 +14,16 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.sharp.History
 import androidx.compose.material.icons.sharp.Info
-import androidx.compose.material3.Card
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -40,36 +44,78 @@ import com.example.dibuild.ui.UITools.CalculateResultsPageBottomBar
 import com.example.dibuild.ui.UITools.InfoPageBottomBar
 import com.example.dibuild.ui.UITools.inputCalcCard
 import com.example.dibuild.ui.UITools.resultCalcCard
+import com.example.dibuild.ui.history.HistoryViewModel
 import com.example.dibuild.ui.theme.DibuildTheme
 
 
-@OptIn(ExperimentalMaterial3Api::class)
+@SuppressLint("UnrememberedMutableState")
 @Composable
 fun TileCalcScreen(
-    navController: NavHostController
+    navController: NavHostController,
+    tileViewModel: TileViewModel = TileViewModel(),
+    historyViewModel: HistoryViewModel = HistoryViewModel()
 ) {
+    val tileUiState by tileViewModel.uiState.collectAsState()
+
+    var room_length by remember { mutableStateOf(tileUiState.room_length) }
+    var room_width by remember { mutableStateOf(tileUiState.room_width) }
+    var tile_length by remember { mutableStateOf(tileUiState.tile_length) }
+    var tile_width by remember { mutableStateOf(tileUiState.tile_width) }
+    var tile_package_num by remember { mutableStateOf(tileUiState.tile_package_num) }
+    var tile_price by remember { mutableStateOf(tileUiState.tile_price) }
+    var gluepackage_weight by remember { mutableStateOf(tileUiState.gluepackage_weight) }
+    var gluepackage_price by remember { mutableStateOf(tileUiState.gluepackage_price) }
+    var glue_consumption by remember { mutableStateOf(tileUiState.glue_consumption) }
+
     val TileParams = listOf(
         ParamsBlock(
             "Параметры помещения", listOf(
-                Param("Длина комнаты", "10", "м"),
-                Param("Ширина комнаты", "10", "м"),
+                Param("Длина комнаты", room_length, "м"){
+                    room_length = it
+                    tileViewModel.updateRoomLength(it)
+                },
+                Param("Ширина комнаты", room_width, "м"){
+                    room_width = it
+                    tileViewModel.updateRoomWidth(it)
+                },
             )
         ),
 
         ParamsBlock(
             "Параметры плитки", listOf(
-                Param("Длина одной\nплитки", "2", "м"),
-                Param("Ширина одной\nплитки", "1", "м"),
-                Param("Количество в\nупаковке", "20", "шт"),
-                Param("Цена за упаковку", "3000", "₽"),
+                Param("Длина одной\nплитки", tile_length, "м"){
+                    tile_length = it
+                    tileViewModel.updateTileLength(it)
+                },
+                Param("Ширина одной\nплитки", tile_width, "м"){
+                    tile_width = it
+                    tileViewModel.updateTileWidth(it)
+                },
+                Param("Количество в\nупаковке", tile_package_num, "шт"){
+                    tile_package_num = it
+                    tileViewModel.updateTilePackageNum(it)
+                },
+                Param("Цена", tile_price, "₽/м2"){
+                    tile_price = it
+                    tileViewModel.updateTilePrice(it)
+                },
             )
         ),
 
         ParamsBlock(
             "Параметры клея", listOf(
-                Param("Масса упаковки\nклея", "1000", "г"),
-                Param("Цена упаковки\nклея", "236", "₽"),
-                Param("Расход клея", "60", "г/м2"),
+                Param("Масса упаковки\nклея", gluepackage_weight, "г"){
+                    gluepackage_weight = it
+                    tileViewModel.updateGluepackageWeight(it)
+                },
+                Param("Цена упаковки\nклея", gluepackage_price, "₽"){
+                    gluepackage_price = it
+                    tileViewModel.updateGluepackagePrice(it)
+                },
+                Param("Расход клея", glue_consumption, "г/м2"){
+                    glue_consumption = it
+                    tileViewModel.updateGlueConsumption(it)
+                },
             )
         )
     )
@@ -114,59 +160,114 @@ fun TileCalcScreen(
             }
         }
 
+//        inputCalcCard(paramsBlockList = TileParams)
+
         Box(modifier = Modifier.weight(1f)) {
             inputCalcCard(paramsBlockList = TileParams)
         }
 
         Box() {
-            CalculatePageBottomBar(navController, DibuildScreens.TileRes.name)
+            CalculatePageBottomBar(navController,
+                DibuildScreens.TileRes.name,
+                { tileViewModel.validate() },
+                {
+                    tileViewModel.clearValues()
+                    navController.popBackStack()
+                    navController.navigate(DibuildScreens.TileCalc.name)
+                },
+                { historyViewModel.updateHistory(tileViewModel.getTileCalcHistory()) },
+                { tileViewModel.countTotal() })
         }
+
+//        Column(verticalArrangement = Arrangement.Bottom,
+//            horizontalAlignment = Alignment.CenterHorizontally,
+//            modifier = Modifier.fillMaxSize()
+//        ){
+//            CalculatePageBottomBar(navController,
+//                DibuildScreens.LaminateRes.name,
+//                { tileViewModel.validate() },
+//                {
+//                    tileViewModel.clearValues()
+//                    navController.popBackStack()
+//                    navController.navigate(DibuildScreens.TileCalc.name)
+//                },
+//                { historyViewModel.updateHistory(tileViewModel.getTileCalcHistory()) },
+//                { tileViewModel.countTotal() })
+//        }
     }
 }
 
+@SuppressLint("StateFlowValueCalledInComposition")
 @Composable
 fun TileCalcResult(
-    navController: NavHostController
+    navController: NavHostController,
+    tileViewModel: TileViewModel = TileViewModel(),
+    historyViewModel: HistoryViewModel = HistoryViewModel(),
 ){
 
     val TileCalculatedResult = listOf(
         CalculatedResults(
             listOf(
-                CalculatedResult("Количество упаковок\nплитки", "3", "шт"),
-                CalculatedResult("Стоимость", "14499", "₽"),
-                CalculatedResult("Излишки упаковок плитки", "1", "шт"),
+                CalculatedResult("Количество упаковок\nплитки",
+                    "%s".format(tileViewModel.uiState.value.packages_num), "шт"),
+                CalculatedResult("Стоимость плитки",
+                    "%.2f".format(tileViewModel.uiState.value.tile_total), "₽"),
+                CalculatedResult("Излишки упаковок плитки",
+                    "%.2f".format(tileViewModel.uiState.value.tile_excess), "шт"),
             )
         ),
 
         CalculatedResults(
             listOf(
-                CalculatedResult("Количество упаковок клея","50", "шт"),
-                CalculatedResult("Стоимость","50", "₽"),
-                CalculatedResult("Излишки упаковок клея","1", "шт"),
+                CalculatedResult("Количество упаковок клея",
+                    "%s".format(tileViewModel.uiState.value.gluepackages_num), "шт"),
+                CalculatedResult("Стоимость клея",
+                    "%.2f".format(tileViewModel.uiState.value.glue_total), "₽"),
+                CalculatedResult("Излишки упаковок клея",
+                    "%.2f".format(tileViewModel.uiState.value.glue_excess), "шт"),
             )
         ),
 
         CalculatedResults(
             listOf(
-                CalculatedResult("Итоговая стоимость", "20000", "₽")
+                CalculatedResult("Итоговая стоимость",
+                    "%.2f".format(tileViewModel.uiState.value.total), "₽")
             )
         )
     )
 
-    Column {
-        Box(
-            contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()
-        ) {
-            resultCalcCard(TileCalculatedResult)
+    Box(
+        contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()
+    ) {
 
-            Column(verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
-            ){
-                CalculateResultsPageBottomBar(navController, DibuildScreens.TileCalc.name)
-            }
+        resultCalcCard(TileCalculatedResult)
+
+        Column(verticalArrangement = Arrangement.Bottom,
+            horizontalAlignment = Alignment.CenterHorizontally,
+            modifier = Modifier.fillMaxSize()
+        ){
+            CalculateResultsPageBottomBar(navController,
+                DibuildScreens.TileCalc.name,
+                historyViewModel)
         }
     }
+//    Column {
+//        Box(
+//            contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()
+//        ) {
+//
+//            resultCalcCard(TileCalculatedResult)
+//
+//            Column(verticalArrangement = Arrangement.Bottom,
+//                horizontalAlignment = Alignment.CenterHorizontally,
+//                modifier = Modifier.fillMaxSize()
+//            ){
+//                CalculateResultsPageBottomBar(navController,
+//                    DibuildScreens.TileCalc.name,
+//                    historyViewModel)
+//            }
+//        }
+//    }
 }
 
 @Composable
