@@ -38,6 +38,7 @@ import com.example.dibuild.ui.tile.TileViewModel
 import com.example.dibuild.ui.wallpapers.WallpapersCalcHelp
 import com.example.dibuild.ui.wallpapers.WallpapersCalcResult
 import com.example.dibuild.ui.wallpapers.WallpapersCalcScreen
+import com.example.dibuild.ui.wallpapers.WallpapersViewModel
 
 enum class DibuildScreens() {
     Sections,
@@ -93,6 +94,8 @@ fun DibuildApp(
 
     val tileViewModel = TileViewModel()
 
+    val wallpapersViewModel = WallpapersViewModel()
+
     NavHost(
         navController = navController,
         startDestination = DibuildScreens.Sections.name,
@@ -122,7 +125,7 @@ fun DibuildApp(
         }
 
         composable(route = DibuildScreens.WallpapersCalc.name) {
-            WallpapersCalcScreen(navController)
+            WallpapersCalcScreen(navController, wallpapersViewModel, historyViewModel)
         }
 
         composable(route = DibuildScreens.WallpapersHelp.name) {
@@ -130,7 +133,7 @@ fun DibuildApp(
         }
 
         composable(route = DibuildScreens.WallpapersRes.name) {
-            WallpapersCalcResult(navController)
+            WallpapersCalcResult(navController, wallpapersViewModel, historyViewModel)
         }
 
         composable(route = DibuildScreens.TileCalc.name) {
