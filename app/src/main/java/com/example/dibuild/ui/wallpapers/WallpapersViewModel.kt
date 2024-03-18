@@ -171,7 +171,7 @@ class WallpapersViewModel : ViewModel() {
                 _uiState.value.rolls_accurate_num,
                 _uiState.value.rolls_excess
             ),
-            "Количество упаковок клея(округлено) = %.2f м^2 * %s г/м^2 / %s г = %s шт".format(
+            "Количество упаковок клея (округлено) = %.2f м^2 * %s г/м^2 / %s г = %s шт".format(
                 _uiState.value.walls_square,
                 _uiState.value.glue_consumption,
                 _uiState.value.gluepackage_weight,

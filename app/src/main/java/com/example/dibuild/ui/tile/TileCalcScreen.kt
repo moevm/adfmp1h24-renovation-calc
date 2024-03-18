@@ -160,8 +160,6 @@ fun TileCalcScreen(
             }
         }
 
-//        inputCalcCard(paramsBlockList = TileParams)
-
         Box(modifier = Modifier.weight(1f)) {
             inputCalcCard(paramsBlockList = TileParams)
         }
@@ -179,21 +177,6 @@ fun TileCalcScreen(
                 { tileViewModel.countTotal() })
         }
 
-//        Column(verticalArrangement = Arrangement.Bottom,
-//            horizontalAlignment = Alignment.CenterHorizontally,
-//            modifier = Modifier.fillMaxSize()
-//        ){
-//            CalculatePageBottomBar(navController,
-//                DibuildScreens.LaminateRes.name,
-//                { tileViewModel.validate() },
-//                {
-//                    tileViewModel.clearValues()
-//                    navController.popBackStack()
-//                    navController.navigate(DibuildScreens.TileCalc.name)
-//                },
-//                { historyViewModel.updateHistory(tileViewModel.getTileCalcHistory()) },
-//                { tileViewModel.countTotal() })
-//        }
     }
 }
 
@@ -251,23 +234,7 @@ fun TileCalcResult(
                 historyViewModel)
         }
     }
-//    Column {
-//        Box(
-//            contentAlignment = Alignment.TopCenter, modifier = Modifier.fillMaxSize()
-//        ) {
-//
-//            resultCalcCard(TileCalculatedResult)
-//
-//            Column(verticalArrangement = Arrangement.Bottom,
-//                horizontalAlignment = Alignment.CenterHorizontally,
-//                modifier = Modifier.fillMaxSize()
-//            ){
-//                CalculateResultsPageBottomBar(navController,
-//                    DibuildScreens.TileCalc.name,
-//                    historyViewModel)
-//            }
-//        }
-//    }
+
 }
 
 @Composable

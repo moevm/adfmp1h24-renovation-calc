@@ -142,7 +142,6 @@ class TileViewModel : ViewModel() {
     }
 
     fun getTileCalcHistory(): List<String> {
-        print("kek")
         return listOf(
             "Плитка",
             "Длина комнаты = %s м".format(_uiState.value.room_length),
@@ -182,7 +181,7 @@ class TileViewModel : ViewModel() {
                 _uiState.value.packages_accurate_num,
                 _uiState.value.tile_excess
             ),
-            "Количество упаковок клея(округлено) = %.2f м^2 * %s г/м^2 / %s г = %s шт".format(
+            "Количество упаковок клея (округлено) = %.2f м^2 * %s г/м^2 / %s г = %s шт".format(
                 _uiState.value.room_square,
                 _uiState.value.glue_consumption,
                 _uiState.value.gluepackage_weight,
