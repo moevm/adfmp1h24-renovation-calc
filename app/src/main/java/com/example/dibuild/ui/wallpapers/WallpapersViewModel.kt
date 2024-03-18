@@ -72,9 +72,9 @@ class WallpapersViewModel : ViewModel() {
             roll_length = "0.0",
             roll_width = "0.0",
             roll_price = "0.0",
-            gluepackage_weight = "0",
+            gluepackage_weight = "0.0",
             gluepackage_price = "0.0",
-            glue_consumption = "0",
+            glue_consumption = "0.0",
         )
     }
 
