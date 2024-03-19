@@ -117,15 +117,15 @@ class WallpapersViewModel : ViewModel() {
 
     fun validate(): Pair<Boolean, List<String>> {
         val validateResults = mapOf(
-            "Длина комнаты" to (_uiState.value.room_length.toDoubleOrNull() != null && _uiState.value.room_length.toDouble() >= 0.0),
-            "Ширина комнаты" to (_uiState.value.room_width.toDoubleOrNull() != null && _uiState.value.room_width.toDouble() >= 0.0),
-            "Высота комнаты" to (_uiState.value.room_height.toDoubleOrNull() != null && _uiState.value.room_height.toDouble() >= 0.0),
+            "Длина комнаты" to (_uiState.value.room_length.toDoubleOrNull() != null && _uiState.value.room_length.toDouble() > 0.0),
+            "Ширина комнаты" to (_uiState.value.room_width.toDoubleOrNull() != null && _uiState.value.room_width.toDouble() > 0.0),
+            "Высота комнаты" to (_uiState.value.room_height.toDoubleOrNull() != null && _uiState.value.room_height.toDouble() > 0.0),
             "Длина рулона" to (_uiState.value.roll_length.toDoubleOrNull() != null && _uiState.value.roll_length.toDouble() > 0.0),
             "Ширина рулона" to (_uiState.value.roll_width.toDoubleOrNull() != null && _uiState.value.roll_width.toDouble() > 0.0),
-            "Цена за рулон" to (_uiState.value.roll_price.toDoubleOrNull() != null && _uiState.value.roll_price.toDouble() >= 0.0),
-            "Масса упаковки клея" to (_uiState.value.gluepackage_weight.toDoubleOrNull() != null && _uiState.value.gluepackage_weight.toDouble() >= 0.0),
-            "Цена упаковки клея" to (_uiState.value.gluepackage_price.toDoubleOrNull() != null && _uiState.value.gluepackage_price.toDouble() >= 0.0),
-            "Расход клея" to (_uiState.value.glue_consumption.toDoubleOrNull() != null && _uiState.value.glue_consumption.toDouble() >= 0.0),
+            "Цена за рулон" to (_uiState.value.roll_price.toDoubleOrNull() != null && _uiState.value.roll_price.toDouble() > 0.0),
+            "Масса упаковки клея" to (_uiState.value.gluepackage_weight.toDoubleOrNull() != null && _uiState.value.gluepackage_weight.toDouble() > 0.0),
+            "Цена упаковки клея" to (_uiState.value.gluepackage_price.toDoubleOrNull() != null && _uiState.value.gluepackage_price.toDouble() > 0.0),
+            "Расход клея" to (_uiState.value.glue_consumption.toDoubleOrNull() != null && _uiState.value.glue_consumption.toDouble() > 0.0),
         )
 
 

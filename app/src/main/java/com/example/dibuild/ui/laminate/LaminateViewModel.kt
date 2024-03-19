@@ -82,12 +82,12 @@ class LaminateViewModel : ViewModel() {
 
     fun validate(): Pair<Boolean, List<String>> {
         val validateResults = mapOf(
-            "Длина комнаты" to (_uiState.value.room_length.toDoubleOrNull() != null && _uiState.value.room_length.toDouble() >= 0.0),
-            "Ширина комнаты" to (_uiState.value.room_width.toDoubleOrNull() != null && _uiState.value.room_width.toDouble() >= 0.0),
+            "Длина комнаты" to (_uiState.value.room_length.toDoubleOrNull() != null && _uiState.value.room_length.toDouble() > 0.0),
+            "Ширина комнаты" to (_uiState.value.room_width.toDoubleOrNull() != null && _uiState.value.room_width.toDouble() > 0.0),
             "Длина доски" to (_uiState.value.board_length.toDoubleOrNull() != null && _uiState.value.board_length.toDouble() > 0.0),
             "Ширина доски" to (_uiState.value.board_width.toDoubleOrNull() != null && _uiState.value.board_width.toDouble() > 0.0),
             "Количество в упаковке" to (_uiState.value.board_num.toIntOrNull() != null && _uiState.value.board_num.toInt() > 0),
-            "Цена" to (_uiState.value.board_price.toDoubleOrNull() != null && _uiState.value.board_price.toDouble() >= 0.0),
+            "Цена" to (_uiState.value.board_price.toDoubleOrNull() != null && _uiState.value.board_price.toDouble() > 0.0),
             )
 
 

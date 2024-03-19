@@ -85,14 +85,14 @@ class ElectricianViewModel : ViewModel() {
 
     fun validate(): Pair<Boolean, List<String>> {
         val validateResults = mapOf(
-            "Количество розеток" to (_uiState.value.socket_num.toIntOrNull() != null && _uiState.value.socket_num.toInt() >= 0),
-            "Количество выключателей" to (_uiState.value.switch_num.toIntOrNull() != null && _uiState.value.switch_num.toInt() >= 0),
-            "Длина провода" to (_uiState.value.wire_length.toDoubleOrNull() != null && _uiState.value.wire_length.toDouble() >= 0.0),
-            "Цена провода" to (_uiState.value.wire_price.toDoubleOrNull() != null && _uiState.value.wire_price.toDouble() >= 0.0),
-            "Длина пластикового короба" to (_uiState.value.duct_length.toDoubleOrNull() != null && _uiState.value.duct_length.toDouble() >= 0.0),
-            "Цена пластикового короба" to (_uiState.value.duct_price.toDoubleOrNull() != null && _uiState.value.duct_price.toDouble() >= 0.0),
-            "Цена розетки" to (_uiState.value.socket_price.toDoubleOrNull() != null && _uiState.value.socket_price.toDouble() >= 0.0),
-            "Цена выключателя" to (_uiState.value.switch_price.toDoubleOrNull() != null && _uiState.value.switch_price.toDouble() >= 0.0),
+            "Количество розеток" to (_uiState.value.socket_num.toIntOrNull() != null && _uiState.value.socket_num.toInt() > 0),
+            "Количество выключателей" to (_uiState.value.switch_num.toIntOrNull() != null && _uiState.value.switch_num.toInt() > 0),
+            "Длина провода" to (_uiState.value.wire_length.toDoubleOrNull() != null && _uiState.value.wire_length.toDouble() > 0.0),
+            "Цена провода" to (_uiState.value.wire_price.toDoubleOrNull() != null && _uiState.value.wire_price.toDouble() > 0.0),
+            "Длина пластикового короба" to (_uiState.value.duct_length.toDoubleOrNull() != null && _uiState.value.duct_length.toDouble() > 0.0),
+            "Цена пластикового короба" to (_uiState.value.duct_price.toDoubleOrNull() != null && _uiState.value.duct_price.toDouble() > 0.0),
+            "Цена розетки" to (_uiState.value.socket_price.toDoubleOrNull() != null && _uiState.value.socket_price.toDouble() > 0.0),
+            "Цена выключателя" to (_uiState.value.switch_price.toDoubleOrNull() != null && _uiState.value.switch_price.toDouble() > 0.0),
         )
 
 
