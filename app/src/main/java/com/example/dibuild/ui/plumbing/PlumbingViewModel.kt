@@ -64,12 +64,12 @@ class PlumbingViewModel : ViewModel() {
 
     fun validate(): Pair<Boolean, List<String>> {
         val validateResults = mapOf(
-            "Длина труб" to (_uiState.value.pipe_length.toDoubleOrNull() != null && _uiState.value.pipe_length.toDouble() >= 0.0),
-            "Цена труб" to (_uiState.value.pipe_price.toDoubleOrNull() != null && _uiState.value.pipe_price.toDouble() >= 0.0),
-            "Количество вентилей" to (_uiState.value.valve_num.toIntOrNull() != null && _uiState.value.valve_num.toInt() >= 0),
-            "Цена вентиля" to (_uiState.value.valve_price.toDoubleOrNull() != null && _uiState.value.valve_price.toDouble() >= 0.0),
-            "Цена счетчика" to (_uiState.value.meter_price.toDoubleOrNull() != null && _uiState.value.meter_price.toDouble() >= 0.0),
-            "Цена фильтра" to (_uiState.value.filter_price.toDoubleOrNull() != null && _uiState.value.filter_price.toDouble() >= 0.0),
+            "Длина труб" to (_uiState.value.pipe_length.toDoubleOrNull() != null && _uiState.value.pipe_length.toDouble() > 0.0),
+            "Цена труб" to (_uiState.value.pipe_price.toDoubleOrNull() != null && _uiState.value.pipe_price.toDouble() > 0.0),
+            "Количество вентилей" to (_uiState.value.valve_num.toIntOrNull() != null && _uiState.value.valve_num.toInt() > 0),
+            "Цена вентиля" to (_uiState.value.valve_price.toDoubleOrNull() != null && _uiState.value.valve_price.toDouble() > 0.0),
+            "Цена счетчика" to (_uiState.value.meter_price.toDoubleOrNull() != null && _uiState.value.meter_price.toDouble() > 0.0),
+            "Цена фильтра" to (_uiState.value.filter_price.toDoubleOrNull() != null && _uiState.value.filter_price.toDouble() > 0.0),
         )
 
 
