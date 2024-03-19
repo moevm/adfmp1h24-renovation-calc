@@ -41,9 +41,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.DibuildScreens
-import com.example.dibuild.model.ParamsBlock
-import com.example.dibuild.ui.UITools.InfoPageBottomBar
-import com.example.dibuild.ui.UITools.SectionsPageBottomBar
+
 
 
 @Composable
@@ -115,18 +113,6 @@ fun SectionsCalcScreen(
                     }
                 }
             }
-
-
-
-
-            Column(
-                verticalArrangement = Arrangement.Bottom,
-                horizontalAlignment = Alignment.CenterHorizontally,
-                modifier = Modifier.fillMaxSize()
-            ) {
-                SectionsPageBottomBar(navController)
-            }
-
         }
     }
 }

@@ -283,29 +283,6 @@ fun InfoPageBottomBar(
 
 }
 
-@Composable
-fun SectionsPageBottomBar(
-    navController: NavHostController
-) {
-    Row(
-        verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.fillMaxWidth()
-    ) {
-        Button(
-            onClick = { /*TODO*/ },
-            modifier = Modifier.size(100.dp)
-        ) {
-            Icon(
-                imageVector = Icons.Sharp.Menu,
-                contentDescription = null,
-                modifier = Modifier
-                    .size(70.dp)
-            )
-        }
-    }
-}
-
 
 @Composable
 @Preview
@@ -331,10 +308,3 @@ fun InfoPageBottomBarPreview() {
     }
 }
 
-@Composable
-@Preview
-fun SectionsPageBottomBarPreview() {
-    DibuildTheme {
-        SectionsPageBottomBar(rememberNavController())
-    }
-}

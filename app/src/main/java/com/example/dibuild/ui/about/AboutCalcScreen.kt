@@ -40,7 +40,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.example.dibuild.ui.UITools.InfoPageBottomBar
-import com.example.dibuild.ui.UITools.SectionsPageBottomBar
 
 
 @Composable
